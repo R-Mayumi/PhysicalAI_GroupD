@@ -1,0 +1,616 @@
+{
+  "model": "qwen3.5:4b",
+  "before": {
+    "time": 1794384436.653324,
+    "used_estimate_bytes": 3333263360,
+    "available_bytes": 11070111744,
+    "swap_used_bytes": 1799090176,
+    "ollama_rss_sum_bytes": 27406336
+  },
+  "options": {
+    "num_ctx": 2048,
+    "num_predict": 128,
+    "num_thread": 6,
+    "num_gpu": 0,
+    "temperature": 0,
+    "seed": 42
+  },
+  "execution": "CPU explicitly requested (num_gpu=0); GPU/NPU not benchmarked",
+  "started_at": "2026-11-11T08:07:16.653875+00:00",
+  "load": {
+    "model": "qwen3.5:4b",
+    "created_at": "2026-11-11T08:07:23.7857204Z",
+    "response": "",
+    "done": true,
+    "done_reason": "load"
+  },
+  "load_wall_s": 7.13239952100048,
+  "inference_started_at_unix": 1794384443.7863073,
+  "inference": {
+    "model": "qwen3.5:4b",
+    "created_at": "2026-11-11T08:07:31.351783888Z",
+    "response": "IMU は加速度や角速度を瞬時に測り、動きの「変化」を捉えます。一方、LiDAR は周囲の物体との距離を直接測定し、「位置情報」を取得します。IMU は短時間正確ですが誤差が蓄積しやすく、LiDAR は環境認識に優れます。両者を組み合わせることで、ロボットの安定した移動を実現します。",
+    "done": true,
+    "done_reason": "stop",
+    "context": [
+      248045,
+      846,
+      198,
+      247359,
+      15685,
+      5205,
+      167392,
+      233742,
+      1728,
+      52,
+      18602,
+      43906,
+      35,
+      905,
+      27279,
+      99077,
+      28310,
+      167898,
+      155858,
+      28452,
+      5205,
+      123759,
+      160026,
+      19054,
+      16,
+      20,
+      15,
+      96356,
+      98020,
+      15685,
+      247206,
+      172808,
+      1710,
+      248046,
+      198,
+      248045,
+      74455,
+      198,
+      248068,
+      271,
+      248069,
+      271,
+      1728,
+      52,
+      173273,
+      118265,
+      67813,
+      96518,
+      98630,
+      28452,
+      98369,
+      171585,
+      99077,
+      29342,
+      5205,
+      178968,
+      15303,
+      12512,
+      247248,
+      10119,
+      28452,
+      102926,
+      160042,
+      1710,
+      104512,
+      5205,
+      43906,
+      35,
+      905,
+      173273,
+      247553,
+      15303,
+      109901,
+      159212,
+      111247,
+      28452,
+      96988,
+      247593,
+      14259,
+      34610,
+      97795,
+      128158,
+      10119,
+      213104,
+      74688,
+      1710,
+      1728,
+      52,
+      173273,
+      96706,
+      99498,
+      105873,
+      150553,
+      103038,
+      96729,
+      27279,
+      99087,
+      99363,
+      14259,
+      182820,
+      5205,
+      43906,
+      35,
+      905,
+      173273,
+      104119,
+      111237,
+      19054,
+      97982,
+      151825,
+      1710,
+      246829,
+      197773,
+      211288,
+      28310,
+      170801,
+      5205,
+      167392,
+      233742,
+      116249,
+      148344,
+      116510,
+      191573,
+      74688,
+      1710
+    ],
+    "total_duration": 7564985242,
+    "load_duration": 873074,
+    "prompt_eval_count": 42,
+    "prompt_eval_cached_count": 0,
+    "prompt_eval_duration": 1083908000,
+    "eval_count": 84,
+    "eval_duration": 6475094000
+  },
+  "inference_finished_at_unix": 1794384451.3542523,
+  "inference_wall_s": 7.567947789000755,
+  "tokens_per_second": 12.972784642199787,
+  "loaded_ps": {
+    "models": [
+      {
+        "name": "qwen3.5:4b",
+        "model": "qwen3.5:4b",
+        "size": 3077528615,
+        "digest": "e0b8c85c75aad2573ff49bec177ebb1013772fba665a53d64c04266439a2222d",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "4.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-11-11T17:12:31.35389438+09:00",
+        "size_vram": 0,
+        "context_length": 2048,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "status": "PASS",
+  "samples": [
+    {
+      "time": 1794384436.6987534,
+      "used_estimate_bytes": 3338588160,
+      "available_bytes": 11064786944,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 28913664
+    },
+    {
+      "time": 1794384436.9673324,
+      "used_estimate_bytes": 3479212032,
+      "available_bytes": 10924163072,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 106762240
+    },
+    {
+      "time": 1794384437.231998,
+      "used_estimate_bytes": 3562917888,
+      "available_bytes": 10840457216,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 138395648
+    },
+    {
+      "time": 1794384437.496023,
+      "used_estimate_bytes": 3573960704,
+      "available_bytes": 10829414400,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 138678272
+    },
+    {
+      "time": 1794384437.7694526,
+      "used_estimate_bytes": 3604602880,
+      "available_bytes": 10798772224,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 183472128
+    },
+    {
+      "time": 1794384438.0396256,
+      "used_estimate_bytes": 3684225024,
+      "available_bytes": 10719150080,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 297648128
+    },
+    {
+      "time": 1794384438.3122268,
+      "used_estimate_bytes": 3778363392,
+      "available_bytes": 10625011712,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 423026688
+    },
+    {
+      "time": 1794384438.5814164,
+      "used_estimate_bytes": 3893104640,
+      "available_bytes": 10510270464,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 536604672
+    },
+    {
+      "time": 1794384438.852014,
+      "used_estimate_bytes": 3986087936,
+      "available_bytes": 10417287168,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 650190848
+    },
+    {
+      "time": 1794384439.1197546,
+      "used_estimate_bytes": 4095709184,
+      "available_bytes": 10307665920,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 763961344
+    },
+    {
+      "time": 1794384439.3873758,
+      "used_estimate_bytes": 4200857600,
+      "available_bytes": 10202517504,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 881778688
+    },
+    {
+      "time": 1794384439.6644597,
+      "used_estimate_bytes": 4288946176,
+      "available_bytes": 10114428928,
+      "swap_used_bytes": 1799090176,
+      "ollama_rss_sum_bytes": 995549184
+    },
+    {
+      "time": 1794384439.930247,
+      "used_estimate_bytes": 4360552448,
+      "available_bytes": 10042822656,
+      "swap_used_bytes": 1800183808,
+      "ollama_rss_sum_bytes": 1107435520
+    },
+    {
+      "time": 1794384440.1989038,
+      "used_estimate_bytes": 4452065280,
+      "available_bytes": 9951309824,
+      "swap_used_bytes": 1800187904,
+      "ollama_rss_sum_bytes": 1213620224
+    },
+    {
+      "time": 1794384440.473632,
+      "used_estimate_bytes": 4576567296,
+      "available_bytes": 9826807808,
+      "swap_used_bytes": 1800278016,
+      "ollama_rss_sum_bytes": 1331585024
+    },
+    {
+      "time": 1794384440.746678,
+      "used_estimate_bytes": 4697767936,
+      "available_bytes": 9705607168,
+      "swap_used_bytes": 1800998912,
+      "ollama_rss_sum_bytes": 1440202752
+    },
+    {
+      "time": 1794384441.0198689,
+      "used_estimate_bytes": 4794900480,
+      "available_bytes": 9608474624,
+      "swap_used_bytes": 1801535488,
+      "ollama_rss_sum_bytes": 1562988544
+    },
+    {
+      "time": 1794384441.2947445,
+      "used_estimate_bytes": 4955385856,
+      "available_bytes": 9447989248,
+      "swap_used_bytes": 1802059776,
+      "ollama_rss_sum_bytes": 1672200192
+    },
+    {
+      "time": 1794384441.5627453,
+      "used_estimate_bytes": 5005602816,
+      "available_bytes": 9397772288,
+      "swap_used_bytes": 1802100736,
+      "ollama_rss_sum_bytes": 1773912064
+    },
+    {
+      "time": 1794384441.8320477,
+      "used_estimate_bytes": 5106671616,
+      "available_bytes": 9296703488,
+      "swap_used_bytes": 1802665984,
+      "ollama_rss_sum_bytes": 1875456000
+    },
+    {
+      "time": 1794384442.1063702,
+      "used_estimate_bytes": 5266419712,
+      "available_bytes": 9136955392,
+      "swap_used_bytes": 1803116544,
+      "ollama_rss_sum_bytes": 2079985664
+    },
+    {
+      "time": 1794384442.3802974,
+      "used_estimate_bytes": 5566509056,
+      "available_bytes": 8836866048,
+      "swap_used_bytes": 1805721600,
+      "ollama_rss_sum_bytes": 2374254592
+    },
+    {
+      "time": 1794384442.6524475,
+      "used_estimate_bytes": 5859516416,
+      "available_bytes": 8543858688,
+      "swap_used_bytes": 1806168064,
+      "ollama_rss_sum_bytes": 2680840192
+    },
+    {
+      "time": 1794384442.9366224,
+      "used_estimate_bytes": 6170079232,
+      "available_bytes": 8233295872,
+      "swap_used_bytes": 1806442496,
+      "ollama_rss_sum_bytes": 2925674496
+    },
+    {
+      "time": 1794384443.2049146,
+      "used_estimate_bytes": 6478217216,
+      "available_bytes": 7925157888,
+      "swap_used_bytes": 1806786560,
+      "ollama_rss_sum_bytes": 3261489152
+    },
+    {
+      "time": 1794384443.478995,
+      "used_estimate_bytes": 6831779840,
+      "available_bytes": 7571595264,
+      "swap_used_bytes": 1807327232,
+      "ollama_rss_sum_bytes": 3636797440
+    },
+    {
+      "time": 1794384443.7459567,
+      "used_estimate_bytes": 6916812800,
+      "available_bytes": 7486562304,
+      "swap_used_bytes": 1807327232,
+      "ollama_rss_sum_bytes": 3605577728
+    },
+    {
+      "time": 1794384444.0326016,
+      "used_estimate_bytes": 6908133376,
+      "available_bytes": 7495241728,
+      "swap_used_bytes": 1807437824,
+      "ollama_rss_sum_bytes": 3625345024
+    },
+    {
+      "time": 1794384444.3000674,
+      "used_estimate_bytes": 6907973632,
+      "available_bytes": 7495401472,
+      "swap_used_bytes": 1807437824,
+      "ollama_rss_sum_bytes": 3625345024
+    },
+    {
+      "time": 1794384444.572931,
+      "used_estimate_bytes": 6913445888,
+      "available_bytes": 7489929216,
+      "swap_used_bytes": 1807437824,
+      "ollama_rss_sum_bytes": 3625345024
+    },
+    {
+      "time": 1794384444.8544478,
+      "used_estimate_bytes": 6976131072,
+      "available_bytes": 7427244032,
+      "swap_used_bytes": 1807437824,
+      "ollama_rss_sum_bytes": 3678040064
+    },
+    {
+      "time": 1794384445.142459,
+      "used_estimate_bytes": 6982352896,
+      "available_bytes": 7421022208,
+      "swap_used_bytes": 1807437824,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384445.4249413,
+      "used_estimate_bytes": 6978056192,
+      "available_bytes": 7425318912,
+      "swap_used_bytes": 1807437824,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384445.7111712,
+      "used_estimate_bytes": 6979665920,
+      "available_bytes": 7423709184,
+      "swap_used_bytes": 1807437824,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384445.9984288,
+      "used_estimate_bytes": 6954594304,
+      "available_bytes": 7448780800,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384446.2889616,
+      "used_estimate_bytes": 6963994624,
+      "available_bytes": 7439380480,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384446.570762,
+      "used_estimate_bytes": 6965616640,
+      "available_bytes": 7437758464,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384446.8480687,
+      "used_estimate_bytes": 6960541696,
+      "available_bytes": 7442833408,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384447.1343157,
+      "used_estimate_bytes": 6955687936,
+      "available_bytes": 7447687168,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384447.4210021,
+      "used_estimate_bytes": 6941876224,
+      "available_bytes": 7461498880,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384447.705191,
+      "used_estimate_bytes": 6947438592,
+      "available_bytes": 7455936512,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681062912
+    },
+    {
+      "time": 1794384447.9899607,
+      "used_estimate_bytes": 6948204544,
+      "available_bytes": 7455170560,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681067008
+    },
+    {
+      "time": 1794384448.2759864,
+      "used_estimate_bytes": 6957887488,
+      "available_bytes": 7445487616,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681071104
+    },
+    {
+      "time": 1794384448.5618865,
+      "used_estimate_bytes": 6976573440,
+      "available_bytes": 7426801664,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681071104
+    },
+    {
+      "time": 1794384448.8417344,
+      "used_estimate_bytes": 6975053824,
+      "available_bytes": 7428321280,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681075200
+    },
+    {
+      "time": 1794384449.1243825,
+      "used_estimate_bytes": 6969053184,
+      "available_bytes": 7434321920,
+      "swap_used_bytes": 1807724544,
+      "ollama_rss_sum_bytes": 3681079296
+    },
+    {
+      "time": 1794384449.405623,
+      "used_estimate_bytes": 6975213568,
+      "available_bytes": 7428161536,
+      "swap_used_bytes": 1807720448,
+      "ollama_rss_sum_bytes": 3681083392
+    },
+    {
+      "time": 1794384449.696418,
+      "used_estimate_bytes": 6955036672,
+      "available_bytes": 7448338432,
+      "swap_used_bytes": 1807720448,
+      "ollama_rss_sum_bytes": 3681087488
+    },
+    {
+      "time": 1794384449.9740646,
+      "used_estimate_bytes": 6969229312,
+      "available_bytes": 7434145792,
+      "swap_used_bytes": 1807720448,
+      "ollama_rss_sum_bytes": 3681087488
+    },
+    {
+      "time": 1794384450.2583437,
+      "used_estimate_bytes": 6965608448,
+      "available_bytes": 7437766656,
+      "swap_used_bytes": 1807720448,
+      "ollama_rss_sum_bytes": 3681091584
+    },
+    {
+      "time": 1794384450.5416038,
+      "used_estimate_bytes": 6974980096,
+      "available_bytes": 7428395008,
+      "swap_used_bytes": 1807720448,
+      "ollama_rss_sum_bytes": 3681091584
+    },
+    {
+      "time": 1794384450.8243685,
+      "used_estimate_bytes": 6947213312,
+      "available_bytes": 7456161792,
+      "swap_used_bytes": 1807720448,
+      "ollama_rss_sum_bytes": 3681095680
+    },
+    {
+      "time": 1794384451.106215,
+      "used_estimate_bytes": 6951841792,
+      "available_bytes": 7451533312,
+      "swap_used_bytes": 1807720448,
+      "ollama_rss_sum_bytes": 3681095680
+    }
+  ],
+  "peak_used_estimate_bytes": 6982352896,
+  "peak_swap_used_bytes": 1807724544,
+  "peak_ollama_rss_sum_bytes": 3681095680,
+  "inference_peaks": {
+    "used_estimate_bytes": 6982352896,
+    "swap_used_bytes": 1807724544,
+    "ollama_rss_sum_bytes": 3681095680
+  },
+  "unload": {
+    "model": "qwen3.5:4b",
+    "created_at": "2026-11-11T08:07:31.355617073Z",
+    "response": "",
+    "done": true,
+    "done_reason": "unload"
+  },
+  "after": {
+    "time": 1794384451.3702433,
+    "used_estimate_bytes": 6955986944,
+    "available_bytes": 7447388160,
+    "swap_used_bytes": 1807720448,
+    "ollama_rss_sum_bytes": 30248960
+  },
+  "ros_returncode": 0,
+  "ros_log": "{\"status\": \"PASS\", \"received\": 169, \"elapsed_s\": 17.17181371300103, \"max_gap_s\": 0.10343939600170415, \"rmw\": \"rmw_fastrtps_cpp\", \"cli\": {\"topic\": {\"returncode\": 0, \"stdout\": \"/environment_audit/heartbeat\\n/parameter_events\\n/rosout\\n\", \"stderr\": \"\"}, \"node\": {\"returncode\": 0, \"stdout\": \"/environment_audit_listener\\n/environment_audit_publisher\\n\", \"stderr\": \"\"}}, \"scope\": \"domain 42, localhost, synthetic String heartbeat; no robot communication\"}\n",
+  "ros_concurrency": {
+    "status": "PASS",
+    "received": 169,
+    "elapsed_s": 17.17181371300103,
+    "max_gap_s": 0.10343939600170415,
+    "rmw": "rmw_fastrtps_cpp",
+    "cli": {
+      "topic": {
+        "returncode": 0,
+        "stdout": "/environment_audit/heartbeat\n/parameter_events\n/rosout\n",
+        "stderr": ""
+      },
+      "node": {
+        "returncode": 0,
+        "stdout": "/environment_audit_listener\n/environment_audit_publisher\n",
+        "stderr": ""
+      }
+    },
+    "scope": "domain 42, localhost, synthetic String heartbeat; no robot communication"
+  },
+  "finished_at": "2026-11-11T08:07:31.785385+00:00"
+}

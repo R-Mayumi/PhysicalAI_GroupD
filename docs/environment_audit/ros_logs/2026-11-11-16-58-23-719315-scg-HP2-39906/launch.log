@@ -1,0 +1,4 @@
+1794383903.7202480 [INFO] [launch]: All log files can be found below /home/scg-hp2/pyhai_go2_workspace/docs/environment_audit/ros_logs/2026-11-11-16-58-23-719315-scg-HP2-39906
+1794383903.7203708 [INFO] [launch]: Default logging verbosity is set to INFO
+1794383903.7617002 [INFO] [check-1]: process started with pid [39907]
+1794383909.2720094 [INFO] [check-1]: process has finished cleanly [pid 39907]

@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "received": 119,
+  "elapsed_s": 12.170128736999686,
+  "max_gap_s": 0.10515677399962442,
+  "rmw": "rmw_fastrtps_cpp",
+  "cli": {
+    "topic": {
+      "returncode": 0,
+      "stdout": "/environment_audit/heartbeat\n/parameter_events\n/rosout\n",
+      "stderr": ""
+    },
+    "node": {
+      "returncode": 0,
+      "stdout": "/environment_audit_listener\n/environment_audit_publisher\n",
+      "stderr": ""
+    }
+  },
+  "scope": "domain 42, localhost, synthetic String heartbeat; no robot communication"
+}

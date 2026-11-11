@@ -1,0 +1,67 @@
+{
+  "started_at": "2026-11-11T07:59:55.201030+00:00",
+  "tag": "4b-q4_K_M",
+  "manifest": {
+    "schemaVersion": 2,
+    "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+    "config": {
+      "mediaType": "application/vnd.docker.container.image.v1+json",
+      "digest": "sha256:5efd52d6d9f24db4a33df0d706ee6037edf026027281bb9568bb066ebc5a4f31",
+      "size": 487
+    },
+    "layers": [
+      {
+        "mediaType": "application/vnd.ollama.image.model",
+        "digest": "sha256:163553aea1b1de62de7c5eb2ef5afb756b4b3133308d9ae7e42e951d8d696ef5",
+        "size": 2620774592
+      },
+      {
+        "mediaType": "application/vnd.ollama.image.template",
+        "digest": "sha256:ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+        "size": 1723
+      },
+      {
+        "mediaType": "application/vnd.ollama.image.license",
+        "digest": "sha256:d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+        "size": 11338
+      },
+      {
+        "mediaType": "application/vnd.ollama.image.params",
+        "digest": "sha256:cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb",
+        "size": 120
+      }
+    ]
+  },
+  "layers": [
+    {
+      "digest": "sha256:5efd52d6d9f24db4a33df0d706ee6037edf026027281bb9568bb066ebc5a4f31",
+      "size_bytes": 487,
+      "status": "EXISTING"
+    },
+    {
+      "digest": "sha256:163553aea1b1de62de7c5eb2ef5afb756b4b3133308d9ae7e42e951d8d696ef5",
+      "size_bytes": 2620774592,
+      "status": "VERIFIED_AND_UPLOADED",
+      "elapsed_s": 520.208471934
+    },
+    {
+      "digest": "sha256:ae370d884f108d16e7cc8fd5259ebc5773a0afa6e078b11f4ed7e39a27e0dfc4",
+      "size_bytes": 1723,
+      "status": "VERIFIED_AND_UPLOADED",
+      "elapsed_s": 0.45568094899863354
+    },
+    {
+      "digest": "sha256:d18a5cc71b84bc4af394a31116bd3932b42241de70c77d2b76d69a314ec8aa12",
+      "size_bytes": 11338,
+      "status": "VERIFIED_AND_UPLOADED",
+      "elapsed_s": 0.5035943959992437
+    },
+    {
+      "digest": "sha256:cff3f395ef3756ab63e58b0ad1b32bb6f802905cae1472e6a12034e4246fbbdb",
+      "size_bytes": 120,
+      "status": "VERIFIED_AND_UPLOADED",
+      "elapsed_s": 0.5165072239997244
+    }
+  ],
+  "finished_at": "2026-11-11T08:08:36.889111+00:00"
+}

@@ -1,0 +1,505 @@
+{
+  "model": "qwen3:4b-q4_K_M",
+  "before": {
+    "time": 1794384520.9990532,
+    "used_estimate_bytes": 3403546624,
+    "available_bytes": 10999828480,
+    "swap_used_bytes": 1805987840,
+    "ollama_rss_sum_bytes": 30863360
+  },
+  "options": {
+    "num_ctx": 2048,
+    "num_predict": 128,
+    "num_thread": 6,
+    "num_gpu": 0,
+    "temperature": 0,
+    "seed": 42
+  },
+  "execution": "CPU explicitly requested (num_gpu=0); GPU/NPU not benchmarked",
+  "started_at": "2026-11-11T08:08:41.001843+00:00",
+  "load": {
+    "model": "qwen3:4b-q4_K_M",
+    "created_at": "2026-11-11T08:08:44.358504019Z",
+    "response": "",
+    "done": true,
+    "done_reason": "load"
+  },
+  "load_wall_s": 3.357473329999266,
+  "inference_started_at_unix": 1794384524.3593438,
+  "inference": {
+    "model": "qwen3:4b-q4_K_M",
+    "created_at": "2026-11-11T08:08:50.72867582Z",
+    "response": "ロボットのIMUは加速度と回転を測り、LiDARは周囲の形状を3Dで捉える。IMUは動きの変化を知る、LiDARは周囲のオブジェクトを認識する。両者はロボットの認識と制御に必要で、補完し合う。",
+    "done": true,
+    "done_reason": "stop",
+    "context": [
+      151644,
+      872,
+      198,
+      101059,
+      102819,
+      16161,
+      5373,
+      41534,
+      125065,
+      65975,
+      15767,
+      1791,
+      52,
+      19182,
+      45421,
+      35,
+      934,
+      28195,
+      107636,
+      29269,
+      134481,
+      15767,
+      126867,
+      29412,
+      5373,
+      84607,
+      102569,
+      132703,
+      19655,
+      16,
+      20,
+      15,
+      18600,
+      100069,
+      16161,
+      44818,
+      105,
+      30858,
+      134093,
+      1773,
+      608,
+      2152,
+      5854,
+      766,
+      151645,
+      198,
+      151644,
+      77091,
+      198,
+      151667,
+      271,
+      151668,
+      271,
+      41534,
+      125065,
+      65975,
+      15767,
+      1791,
+      52,
+      15322,
+      20929,
+      101149,
+      19182,
+      18397,
+      100459,
+      95,
+      29412,
+      107636,
+      30331,
+      5373,
+      45421,
+      35,
+      934,
+      15322,
+      40542,
+      9722,
+      110,
+      15767,
+      107241,
+      29412,
+      18,
+      35,
+      16161,
+      103153,
+      125076,
+      1773,
+      1791,
+      52,
+      15322,
+      136087,
+      15767,
+      124994,
+      32108,
+      29412,
+      52183,
+      29269,
+      5373,
+      45421,
+      35,
+      934,
+      15322,
+      40542,
+      9722,
+      110,
+      15767,
+      89862,
+      51784,
+      127181,
+      127422,
+      29412,
+      110790,
+      53826,
+      1773,
+      3490,
+      94,
+      134688,
+      41534,
+      125065,
+      65975,
+      15767,
+      110790,
+      19182,
+      43316,
+      101515,
+      19655,
+      100270,
+      16161,
+      5373,
+      108100,
+      46306,
+      14682,
+      136667,
+      1773
+    ],
+    "total_duration": 6368678885,
+    "load_duration": 806843,
+    "prompt_eval_count": 53,
+    "prompt_eval_cached_count": 0,
+    "prompt_eval_duration": 1106343000,
+    "eval_count": 81,
+    "eval_duration": 5256929000
+  },
+  "inference_finished_at_unix": 1794384530.7307906,
+  "inference_wall_s": 6.371450349000952,
+  "tokens_per_second": 15.408235492623163,
+  "loaded_ps": {
+    "models": [
+      {
+        "name": "qwen3:4b-q4_K_M",
+        "model": "qwen3:4b-q4_K_M",
+        "size": 3005522901,
+        "digest": "2bfd38a7daaf4b1037efe517ccb73d1a3bbd4822cf89f1a82be1569050a114e0",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-11-11T17:13:50.730433861+09:00",
+        "size_vram": 0,
+        "context_length": 2048,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "status": "PASS",
+  "samples": [
+    {
+      "time": 1794384521.0180414,
+      "used_estimate_bytes": 3408613376,
+      "available_bytes": 10994761728,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 30875648
+    },
+    {
+      "time": 1794384521.2852437,
+      "used_estimate_bytes": 3466608640,
+      "available_bytes": 10936766464,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 99885056
+    },
+    {
+      "time": 1794384521.5526664,
+      "used_estimate_bytes": 3498418176,
+      "available_bytes": 10904956928,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 143163392
+    },
+    {
+      "time": 1794384521.8196504,
+      "used_estimate_bytes": 3731959808,
+      "available_bytes": 10671415296,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 381079552
+    },
+    {
+      "time": 1794384522.087078,
+      "used_estimate_bytes": 3946508288,
+      "available_bytes": 10456866816,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 566398976
+    },
+    {
+      "time": 1794384522.3530443,
+      "used_estimate_bytes": 4120887296,
+      "available_bytes": 10282487808,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 739401728
+    },
+    {
+      "time": 1794384522.6222382,
+      "used_estimate_bytes": 4356435968,
+      "available_bytes": 10046939136,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 977735680
+    },
+    {
+      "time": 1794384522.8864648,
+      "used_estimate_bytes": 4552523776,
+      "available_bytes": 9850851328,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 1213874176
+    },
+    {
+      "time": 1794384523.1560814,
+      "used_estimate_bytes": 4765782016,
+      "available_bytes": 9637593088,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 1458507776
+    },
+    {
+      "time": 1794384523.427082,
+      "used_estimate_bytes": 4979277824,
+      "available_bytes": 9424097280,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 1682665472
+    },
+    {
+      "time": 1794384523.6906261,
+      "used_estimate_bytes": 5396717568,
+      "available_bytes": 9006657536,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 2131722240
+    },
+    {
+      "time": 1794384523.9596887,
+      "used_estimate_bytes": 6266732544,
+      "available_bytes": 8136642560,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3009077248
+    },
+    {
+      "time": 1794384524.2301085,
+      "used_estimate_bytes": 6354415616,
+      "available_bytes": 8048959488,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3034935296
+    },
+    {
+      "time": 1794384524.514311,
+      "used_estimate_bytes": 6367326208,
+      "available_bytes": 8036048896,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041775616
+    },
+    {
+      "time": 1794384524.7884088,
+      "used_estimate_bytes": 6366445568,
+      "available_bytes": 8036929536,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041775616
+    },
+    {
+      "time": 1794384525.0628555,
+      "used_estimate_bytes": 6364565504,
+      "available_bytes": 8038809600,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041775616
+    },
+    {
+      "time": 1794384525.351326,
+      "used_estimate_bytes": 6367531008,
+      "available_bytes": 8035844096,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041775616
+    },
+    {
+      "time": 1794384525.638426,
+      "used_estimate_bytes": 6376419328,
+      "available_bytes": 8026955776,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384525.9254138,
+      "used_estimate_bytes": 6378274816,
+      "available_bytes": 8025100288,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384526.2148786,
+      "used_estimate_bytes": 6378160128,
+      "available_bytes": 8025214976,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384526.5022361,
+      "used_estimate_bytes": 6379163648,
+      "available_bytes": 8024211456,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384526.7881339,
+      "used_estimate_bytes": 6384910336,
+      "available_bytes": 8018464768,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384527.0705488,
+      "used_estimate_bytes": 6382264320,
+      "available_bytes": 8021110784,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384527.3555834,
+      "used_estimate_bytes": 6384758784,
+      "available_bytes": 8018616320,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384527.6401343,
+      "used_estimate_bytes": 6389047296,
+      "available_bytes": 8014327808,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384527.9251068,
+      "used_estimate_bytes": 6385041408,
+      "available_bytes": 8018333696,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384528.208694,
+      "used_estimate_bytes": 6383099904,
+      "available_bytes": 8020275200,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384528.4935265,
+      "used_estimate_bytes": 6388838400,
+      "available_bytes": 8014536704,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384528.7728631,
+      "used_estimate_bytes": 6380765184,
+      "available_bytes": 8022609920,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384529.0582948,
+      "used_estimate_bytes": 6380568576,
+      "available_bytes": 8022806528,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041841152
+    },
+    {
+      "time": 1794384529.3391523,
+      "used_estimate_bytes": 6382030848,
+      "available_bytes": 8021344256,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041845248
+    },
+    {
+      "time": 1794384529.62247,
+      "used_estimate_bytes": 6392467456,
+      "available_bytes": 8010907648,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041849344
+    },
+    {
+      "time": 1794384529.9062202,
+      "used_estimate_bytes": 6393147392,
+      "available_bytes": 8010227712,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041853440
+    },
+    {
+      "time": 1794384530.1935544,
+      "used_estimate_bytes": 6397607936,
+      "available_bytes": 8005767168,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041857536
+    },
+    {
+      "time": 1794384530.4777784,
+      "used_estimate_bytes": 6408646656,
+      "available_bytes": 7994728448,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041861632
+    },
+    {
+      "time": 1794384530.7439842,
+      "used_estimate_bytes": 6408302592,
+      "available_bytes": 7995072512,
+      "swap_used_bytes": 1805987840,
+      "ollama_rss_sum_bytes": 3041923072
+    }
+  ],
+  "peak_used_estimate_bytes": 6408646656,
+  "peak_swap_used_bytes": 1805987840,
+  "peak_ollama_rss_sum_bytes": 3041923072,
+  "inference_peaks": {
+    "used_estimate_bytes": 6408646656,
+    "swap_used_bytes": 1805987840,
+    "ollama_rss_sum_bytes": 3041861632
+  },
+  "unload": {
+    "model": "qwen3:4b-q4_K_M",
+    "created_at": "2026-11-11T08:08:50.744934748Z",
+    "response": "",
+    "done": true,
+    "done_reason": "unload"
+  },
+  "after": {
+    "time": 1794384530.7604678,
+    "used_estimate_bytes": 6405812224,
+    "available_bytes": 7997562880,
+    "swap_used_bytes": 1805987840,
+    "ollama_rss_sum_bytes": 29286400
+  },
+  "ros_returncode": 0,
+  "ros_log": "{\"status\": \"PASS\", \"received\": 119, \"elapsed_s\": 12.170128736999686, \"max_gap_s\": 0.10515677399962442, \"rmw\": \"rmw_fastrtps_cpp\", \"cli\": {\"topic\": {\"returncode\": 0, \"stdout\": \"/environment_audit/heartbeat\\n/parameter_events\\n/rosout\\n\", \"stderr\": \"\"}, \"node\": {\"returncode\": 0, \"stdout\": \"/environment_audit_listener\\n/environment_audit_publisher\\n\", \"stderr\": \"\"}}, \"scope\": \"domain 42, localhost, synthetic String heartbeat; no robot communication\"}\n",
+  "ros_concurrency": {
+    "status": "PASS",
+    "received": 119,
+    "elapsed_s": 12.170128736999686,
+    "max_gap_s": 0.10515677399962442,
+    "rmw": "rmw_fastrtps_cpp",
+    "cli": {
+      "topic": {
+        "returncode": 0,
+        "stdout": "/environment_audit/heartbeat\n/parameter_events\n/rosout\n",
+        "stderr": ""
+      },
+      "node": {
+        "returncode": 0,
+        "stdout": "/environment_audit_listener\n/environment_audit_publisher\n",
+        "stderr": ""
+      }
+    },
+    "scope": "domain 42, localhost, synthetic String heartbeat; no robot communication"
+  },
+  "finished_at": "2026-11-11T08:08:51.176099+00:00"
+}

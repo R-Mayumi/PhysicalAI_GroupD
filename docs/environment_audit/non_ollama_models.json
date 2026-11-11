@@ -1,0 +1,17 @@
+[
+  {
+    "path": "/home/scg-hp2/yolov8n.pt",
+    "size_bytes": 6549796,
+    "resolved": "/home/scg-hp2/yolov8n.pt"
+  },
+  {
+    "path": "/home/scg-hp2/.cache/huggingface/hub/models--Systran--faster-whisper-base/snapshots/ebe41f70d5b6dfa9166e2c581c45c9c0cfc57b66/model.bin",
+    "size_bytes": 145217532,
+    "resolved": "/home/scg-hp2/.cache/huggingface/hub/blobs/0c/0c4d8d814973160f53608ff0aa1618a90abbce9ed632bbc54930475ba82ce973"
+  },
+  {
+    "path": "/home/scg-hp2/ros_ai_workspace/yolov8n.pt",
+    "size_bytes": 6549796,
+    "resolved": "/home/scg-hp2/ros_ai_workspace/yolov8n.pt"
+  }
+]

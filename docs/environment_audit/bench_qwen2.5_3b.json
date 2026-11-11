@@ -1,0 +1,568 @@
+{
+  "model": "qwen2.5:3b",
+  "before": {
+    "time": 1794383434.6432157,
+    "used_estimate_bytes": 3590676480,
+    "available_bytes": 10812698624,
+    "swap_used_bytes": 1511571456,
+    "ollama_rss_sum_bytes": 29372416
+  },
+  "options": {
+    "num_ctx": 2048,
+    "num_predict": 128,
+    "num_thread": 6,
+    "num_gpu": 0,
+    "temperature": 0,
+    "seed": 42
+  },
+  "execution": "CPU explicitly requested (num_gpu=0); GPU/NPU not benchmarked",
+  "started_at": "2026-11-11T07:50:34.643685+00:00",
+  "load": {
+    "model": "qwen2.5:3b",
+    "created_at": "2026-11-11T07:50:38.021236028Z",
+    "response": "",
+    "done": true,
+    "done_reason": "load"
+  },
+  "load_wall_s": 3.378851188999761,
+  "inference": {
+    "model": "qwen2.5:3b",
+    "created_at": "2026-11-11T07:50:44.700044253Z",
+    "response": "ロボットのIMU（インercialモーションセンサ）は、ロボットが回転したり移動したりしたときにどれだけ動いたかを測るセンサーで、主に角速度と加速度を測ります。一方、LiDAR（レーダー）は、ロボットがどのくらい近づいたかや、どのくらい離れたかを測るための距離センサーです。つまり、IMUはロボットの動きを知らせ、LiDARはその場の地形や物体の位置を知らせます。",
+    "done": true,
+    "done_reason": "stop",
+    "context": [
+      151644,
+      8948,
+      198,
+      2610,
+      525,
+      1207,
+      16948,
+      11,
+      3465,
+      553,
+      54364,
+      14817,
+      13,
+      1446,
+      525,
+      264,
+      10950,
+      17847,
+      13,
+      151645,
+      198,
+      151644,
+      872,
+      198,
+      101059,
+      102819,
+      16161,
+      5373,
+      41534,
+      125065,
+      65975,
+      15767,
+      1791,
+      52,
+      19182,
+      45421,
+      35,
+      934,
+      28195,
+      107636,
+      29269,
+      134481,
+      15767,
+      126867,
+      29412,
+      5373,
+      84607,
+      102569,
+      132703,
+      19655,
+      16,
+      20,
+      15,
+      18600,
+      100069,
+      16161,
+      44818,
+      105,
+      30858,
+      134093,
+      1773,
+      151645,
+      198,
+      151644,
+      77091,
+      198,
+      41534,
+      125065,
+      65975,
+      15767,
+      1791,
+      52,
+      9909,
+      75071,
+      7991,
+      125046,
+      125897,
+      127153,
+      59768,
+      7552,
+      15322,
+      5373,
+      41534,
+      125065,
+      65975,
+      28195,
+      18397,
+      100459,
+      95,
+      130720,
+      59534,
+      90775,
+      130720,
+      54951,
+      131435,
+      134278,
+      124771,
+      90775,
+      124260,
+      31049,
+      29412,
+      107636,
+      29269,
+      127153,
+      130020,
+      16161,
+      5373,
+      35568,
+      19655,
+      63836,
+      101149,
+      19182,
+      20929,
+      101149,
+      29412,
+      107636,
+      129443,
+      1773,
+      105235,
+      5373,
+      45421,
+      35,
+      934,
+      9909,
+      43871,
+      24041,
+      222,
+      11710,
+      7552,
+      15322,
+      5373,
+      41534,
+      125065,
+      65975,
+      28195,
+      126055,
+      129103,
+      59258,
+      125301,
+      124260,
+      31049,
+      70189,
+      5373,
+      126055,
+      129103,
+      101606,
+      129310,
+      31049,
+      29412,
+      107636,
+      29269,
+      124616,
+      15767,
+      118209,
+      127153,
+      130020,
+      37541,
+      1773,
+      135446,
+      5373,
+      1791,
+      52,
+      15322,
+      41534,
+      125065,
+      65975,
+      15767,
+      136087,
+      29412,
+      52183,
+      137433,
+      5373,
+      45421,
+      35,
+      934,
+      15322,
+      57326,
+      74167,
+      15767,
+      111282,
+      70189,
+      109840,
+      15767,
+      81812,
+      29412,
+      52183,
+      137433,
+      32441,
+      1773
+    ],
+    "total_duration": 6677061916,
+    "load_duration": 913189,
+    "prompt_eval_count": 66,
+    "prompt_eval_cached_count": 0,
+    "prompt_eval_duration": 813761000,
+    "eval_count": 124,
+    "eval_duration": 5857916000
+  },
+  "inference_wall_s": 6.679591592999714,
+  "tokens_per_second": 21.16793753956185,
+  "loaded_ps": {
+    "models": [
+      {
+        "name": "qwen2.5:3b",
+        "model": "qwen2.5:3b",
+        "size": 2090766171,
+        "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-11-11T16:55:44.701732624+09:00",
+        "size_vram": 0,
+        "context_length": 2048,
+        "runner": "llamacpp"
+      }
+    ]
+  },
+  "status": "PASS",
+  "samples": [
+    {
+      "time": 1794383434.6687233,
+      "used_estimate_bytes": 3594670080,
+      "available_bytes": 10808705024,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 30261248
+    },
+    {
+      "time": 1794383434.9314876,
+      "used_estimate_bytes": 3660791808,
+      "available_bytes": 10742583296,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33280000
+    },
+    {
+      "time": 1794383435.1916294,
+      "used_estimate_bytes": 3704709120,
+      "available_bytes": 10698665984,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383435.4547517,
+      "used_estimate_bytes": 3834454016,
+      "available_bytes": 10568921088,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383435.7172298,
+      "used_estimate_bytes": 3977736192,
+      "available_bytes": 10425638912,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383435.9773264,
+      "used_estimate_bytes": 4140613632,
+      "available_bytes": 10262761472,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383436.2390869,
+      "used_estimate_bytes": 4297404416,
+      "available_bytes": 10105970688,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383436.4996967,
+      "used_estimate_bytes": 4460818432,
+      "available_bytes": 9942556672,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383436.7620153,
+      "used_estimate_bytes": 4583878656,
+      "available_bytes": 9819496448,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383437.0218177,
+      "used_estimate_bytes": 4724649984,
+      "available_bytes": 9678725120,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383437.2858777,
+      "used_estimate_bytes": 4879429632,
+      "available_bytes": 9523945472,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383437.5488315,
+      "used_estimate_bytes": 5094637568,
+      "available_bytes": 9308737536,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383437.8109486,
+      "used_estimate_bytes": 5534412800,
+      "available_bytes": 8868962304,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 33366016
+    },
+    {
+      "time": 1794383438.0804522,
+      "used_estimate_bytes": 5691273216,
+      "available_bytes": 8712101888,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32628736
+    },
+    {
+      "time": 1794383438.3507895,
+      "used_estimate_bytes": 5691871232,
+      "available_bytes": 8711503872,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32628736
+    },
+    {
+      "time": 1794383438.624446,
+      "used_estimate_bytes": 5693042688,
+      "available_bytes": 8710332416,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32628736
+    },
+    {
+      "time": 1794383438.8947277,
+      "used_estimate_bytes": 5691564032,
+      "available_bytes": 8711811072,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383439.1674728,
+      "used_estimate_bytes": 5685424128,
+      "available_bytes": 8717950976,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383439.4421034,
+      "used_estimate_bytes": 5685350400,
+      "available_bytes": 8718024704,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383439.710794,
+      "used_estimate_bytes": 5685862400,
+      "available_bytes": 8717512704,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383439.9825912,
+      "used_estimate_bytes": 5684133888,
+      "available_bytes": 8719241216,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383440.2559838,
+      "used_estimate_bytes": 5684158464,
+      "available_bytes": 8719216640,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383440.5265496,
+      "used_estimate_bytes": 5685014528,
+      "available_bytes": 8718360576,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383440.7983053,
+      "used_estimate_bytes": 5683531776,
+      "available_bytes": 8719843328,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32641024
+    },
+    {
+      "time": 1794383441.0713832,
+      "used_estimate_bytes": 5677469696,
+      "available_bytes": 8725905408,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383441.3428543,
+      "used_estimate_bytes": 5677944832,
+      "available_bytes": 8725430272,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383441.6191964,
+      "used_estimate_bytes": 5672714240,
+      "available_bytes": 8730660864,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383441.894462,
+      "used_estimate_bytes": 5673508864,
+      "available_bytes": 8729866240,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383442.16743,
+      "used_estimate_bytes": 5669007360,
+      "available_bytes": 8734367744,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383442.4392455,
+      "used_estimate_bytes": 5668630528,
+      "available_bytes": 8734744576,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383442.7133539,
+      "used_estimate_bytes": 5669048320,
+      "available_bytes": 8734326784,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383442.9872644,
+      "used_estimate_bytes": 5664776192,
+      "available_bytes": 8738598912,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383443.2595997,
+      "used_estimate_bytes": 5664743424,
+      "available_bytes": 8738631680,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383443.5281968,
+      "used_estimate_bytes": 5665062912,
+      "available_bytes": 8738312192,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383443.799077,
+      "used_estimate_bytes": 5664989184,
+      "available_bytes": 8738385920,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383444.0682635,
+      "used_estimate_bytes": 5664223232,
+      "available_bytes": 8739151872,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383444.3407245,
+      "used_estimate_bytes": 5664059392,
+      "available_bytes": 8739315712,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    },
+    {
+      "time": 1794383444.6162825,
+      "used_estimate_bytes": 5666676736,
+      "available_bytes": 8736698368,
+      "swap_used_bytes": 1511571456,
+      "ollama_rss_sum_bytes": 32653312
+    }
+  ],
+  "peak_used_estimate_bytes": 5693042688,
+  "peak_swap_used_bytes": 1511571456,
+  "peak_ollama_rss_sum_bytes": 33366016,
+  "unload": {
+    "model": "qwen2.5:3b",
+    "created_at": "2026-11-11T07:50:44.705765258Z",
+    "response": "",
+    "done": true,
+    "done_reason": "unload"
+  },
+  "after": {
+    "time": 1794383444.7148414,
+    "used_estimate_bytes": 5668085760,
+    "available_bytes": 8735289344,
+    "swap_used_bytes": 1511571456,
+    "ollama_rss_sum_bytes": 32657408
+  },
+  "ros_returncode": 0,
+  "ros_log": "{\"status\": \"PASS\", \"received\": 122, \"elapsed_s\": 12.470260871999926, \"max_gap_s\": 0.10154141299972252, \"rmw\": \"rmw_fastrtps_cpp\", \"cli\": {\"topic\": {\"returncode\": 0, \"stdout\": \"/environment_audit/heartbeat\\n/parameter_events\\n/rosout\\n\", \"stderr\": \"\"}, \"node\": {\"returncode\": 0, \"stdout\": \"/environment_audit_listener\\n/environment_audit_publisher\\n\", \"stderr\": \"\"}}, \"scope\": \"domain 42, localhost, synthetic String heartbeat; no robot communication\"}\n",
+  "ros_concurrency": {
+    "status": "PASS",
+    "received": 122,
+    "elapsed_s": 12.470260871999926,
+    "max_gap_s": 0.10154141299972252,
+    "rmw": "rmw_fastrtps_cpp",
+    "cli": {
+      "topic": {
+        "returncode": 0,
+        "stdout": "/environment_audit/heartbeat\n/parameter_events\n/rosout\n",
+        "stderr": ""
+      },
+      "node": {
+        "returncode": 0,
+        "stdout": "/environment_audit_listener\n/environment_audit_publisher\n",
+        "stderr": ""
+      }
+    },
+    "scope": "domain 42, localhost, synthetic String heartbeat; no robot communication"
+  },
+  "finished_at": "2026-11-11T07:50:45.080120+00:00"
+}

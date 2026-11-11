@@ -1,0 +1,17 @@
+{
+  "kernel": {
+    "status": "PASS",
+    "output": [
+      "/home/scg-hp2/pyhai_go2_workspace/.venv-ai 2.2.6 5.0.0 3.17.0\n"
+    ]
+  },
+  "server": {
+    "status": "PASS",
+    "http_status": 200,
+    "api": {
+      "version": "2.21.1"
+    },
+    "bind": "127.0.0.1"
+  },
+  "status": "PASS"
+}
