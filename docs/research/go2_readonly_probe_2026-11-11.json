@@ -1,0 +1,589 @@
+{
+  "started_at": "2026-11-11T06:26:14.689463+00:00",
+  "net_if": "enx9c69d351a4cf",
+  "scope": "DDS subscriptions and read-only RPCs; no motion, setters, audio playback, or robot filesystem access",
+  "packages": {
+    "cyclonedds": true,
+    "cv2": true,
+    "aiortc": false,
+    "unitree_webrtc_connect": false,
+    "go2_webrtc_driver": false,
+    "rclpy": true
+  },
+  "topics": {
+    "rt/sportmodestate": {
+      "count": 3218,
+      "sample": {
+        "mode": 0,
+        "error_code": 1001,
+        "position": [
+          0.10464039444923401,
+          -0.023139873519539833,
+          0.0504891499876976
+        ],
+        "velocity": [
+          1.3429162226685776e-09,
+          -2.435119605959102e-10,
+          1.0534562555619686e-08
+        ],
+        "body_height": 0.07199392467737198
+      },
+      "observed_span_s": 10.787,
+      "approx_hz": 298.2
+    },
+    "rt/lf/sportmodestate": {
+      "count": 216,
+      "sample": {
+        "mode": 0,
+        "error_code": 1001,
+        "position": [
+          0.10464122891426086,
+          -0.023139582946896553,
+          0.05048930272459984
+        ],
+        "velocity": [
+          1.2835565499358381e-08,
+          -2.3081501154820216e-09,
+          1.268498408535379e-07
+        ],
+        "body_height": 0.07200012356042862
+      },
+      "observed_span_s": 10.748,
+      "approx_hz": 20.0
+    },
+    "rt/lowstate": {
+      "count": 5363,
+      "sample": {
+        "version_raw": [
+          0,
+          0
+        ],
+        "battery_soc": 97,
+        "power_v": 32.005226135253906,
+        "imu_rpy": [
+          -0.01748526468873024,
+          -0.1019836887717247,
+          0.1370789110660553
+        ],
+        "motor_state_slots": 20,
+        "foot_force": [
+          17,
+          24,
+          17,
+          14
+        ],
+        "foot_force_est": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "wireless_remote_bytes": 40
+      },
+      "observed_span_s": 10.781,
+      "approx_hz": 497.4
+    },
+    "rt/lf/lowstate": {
+      "count": 215,
+      "sample": {
+        "version_raw": [
+          0,
+          0
+        ],
+        "battery_soc": 97,
+        "power_v": 32.005226135253906,
+        "imu_rpy": [
+          -0.01753224804997444,
+          -0.1019413098692894,
+          0.13710418343544006
+        ],
+        "motor_state_slots": 20,
+        "foot_force": [
+          17,
+          24,
+          17,
+          14
+        ],
+        "foot_force_est": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "wireless_remote_bytes": 40
+      },
+      "observed_span_s": 10.699,
+      "approx_hz": 20.0
+    },
+    "rt/utlidar/cloud": {
+      "count": 167,
+      "sample": {
+        "width": 3882,
+        "height": 1,
+        "frame_id": "utlidar_lidar",
+        "point_step": 32,
+        "data_bytes": 124224,
+        "fields": [
+          "x",
+          "y",
+          "z",
+          "intensity",
+          "ring",
+          "time"
+        ]
+      },
+      "observed_span_s": 10.765,
+      "approx_hz": 15.4
+    },
+    "rt/utlidar/voxel_map": {
+      "count": 0,
+      "observed_span_s": 0,
+      "approx_hz": null
+    },
+    "rt/utlidar/lidar_state": {
+      "count": 0,
+      "observed_span_s": 0,
+      "approx_hz": null
+    },
+    "rt/wirelesscontroller": {
+      "count": 0,
+      "observed_span_s": 0,
+      "approx_hz": null
+    },
+    "rt/uwbstate": {
+      "count": 0,
+      "observed_span_s": 0,
+      "approx_hz": null
+    }
+  },
+  "rpc": {
+    "sport.GetServerApiVersion": {
+      "code": 0,
+      "value": "1.0.0.1",
+      "elapsed_s": 0.003
+    },
+    "vui.GetServerApiVersion": {
+      "code": 3104,
+      "value": null,
+      "elapsed_s": 3.001
+    },
+    "vui.GetSwitch": {
+      "code": 0,
+      "value": 1,
+      "elapsed_s": 0.003
+    },
+    "vui.GetVolume": {
+      "code": 0,
+      "value": 0,
+      "elapsed_s": 0.002
+    },
+    "vui.GetBrightness": {
+      "code": 0,
+      "value": 0,
+      "elapsed_s": 0.002
+    },
+    "robot_state.GetServerApiVersion": {
+      "code": 0,
+      "value": "1.0.0.2",
+      "elapsed_s": 0.002
+    },
+    "robot_state.ServiceList": {
+      "code": 0,
+      "value": [
+        {
+          "name": "4gcm",
+          "status": 0,
+          "protect": 1
+        },
+        {
+          "name": "advanced_sport",
+          "status": 1,
+          "protect": 0
+        },
+        {
+          "name": "ai_sport",
+          "status": 1,
+          "protect": 0
+        },
+        {
+          "name": "audio_hub",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "audio_player_service",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "bashrunner",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "basic_service",
+          "status": 0,
+          "protect": 1
+        },
+        {
+          "name": "battery_guard",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "chat_go",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "gesture_recognition",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "go2_videohub_rtsp_server",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "master_service",
+          "status": 0,
+          "protect": 1
+        },
+        {
+          "name": "mcf",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "motion_switcher",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "net_switcher",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "obstacles_avoid",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "ota_box",
+          "status": 1,
+          "protect": 0
+        },
+        {
+          "name": "pet_go",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "programming_actuator",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "robot_state",
+          "status": 0,
+          "protect": 1
+        },
+        {
+          "name": "sbus_handle",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "sport_mode",
+          "status": 1,
+          "protect": 0
+        },
+        {
+          "name": "unitree_lidar",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "unitree_lidar_slam",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "utrack",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "video_hub",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "voxel_height_mapping",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "vui_service",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "webrtc_bridge",
+          "status": 0,
+          "protect": 1
+        },
+        {
+          "name": "webrtc_multicast_responder",
+          "status": 0,
+          "protect": 0
+        },
+        {
+          "name": "webrtc_signal_server",
+          "status": 0,
+          "protect": 1
+        }
+      ],
+      "elapsed_s": 0.003
+    },
+    "obstacles_avoid.GetServerApiVersion": {
+      "code": 0,
+      "value": "1.0.0.2",
+      "elapsed_s": 0.002
+    },
+    "obstacles_avoid.SwitchGet": {
+      "code": 0,
+      "value": true,
+      "elapsed_s": 0.002
+    },
+    "videohub.GetServerApiVersion": {
+      "code": 0,
+      "value": "1.0.0.0",
+      "elapsed_s": 0.003
+    },
+    "videohub.GetImageSample": {
+      "code": 0,
+      "bytes": 191724,
+      "decoded_shape": [
+        1080,
+        1920,
+        3
+      ],
+      "image_saved": false,
+      "elapsed_s": 0.264
+    },
+    "audiohub.GetAudioList": {
+      "code": 0,
+      "value": "{\"audio_list\": []}",
+      "elapsed_s": 0.096
+    },
+    "audiohub.GetPlayMode": {
+      "code": 0,
+      "value": "{\"play_mode\": \"no_cycle\"}",
+      "elapsed_s": 0.101
+    }
+  },
+  "dds_discovery": {
+    "publications": {
+      "rt/api/arm/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/assistant_recorder/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/assistant_recorder/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/audiohub/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/audiohub/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/bashrunner/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/bashrunner/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/config/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/config/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/fourg_agent/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/fourg_agent/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/gas_sensor/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/gesture/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/gpt/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/gpt/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/motion_switcher/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/motion_switcher/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/obstacles_avoid/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/obstacles_avoid/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/pet/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/pet/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/programming_actuator/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/programming_actuator/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/rm_con/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/robot_state/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/robot_state/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/slam_operate/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/sport/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/sport/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/sport_lease/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/uwbswitch/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/uwbswitch/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/videohub/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/videohub/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/vla/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/voice/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/vui/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/vui/response": "unitree_api::msg::dds_::Response_",
+      "rt/arm_Command": "unitree_arm::msg::dds_::ArmString_",
+      "rt/arm_sdk": "unitree_hg::msg::dds_::LowCmd_",
+      "rt/audiohub/player/state": "std_msgs::msg::dds_::String_",
+      "rt/audiosender": "unitree_go::msg::dds_::AudioData_",
+      "rt/config_change_status": "unitree_go::msg::dds_::ConfigChangeStatus_",
+      "rt/frontvideostream": "unitree_go::msg::dds_::Go2FrontVideoData_",
+      "rt/gesture/result": "std_msgs::msg::dds_::String_",
+      "rt/gnss": "std_msgs::msg::dds_::String_",
+      "rt/gpt_cmd": "std_msgs::msg::dds_::String_",
+      "rt/gpt_msg": "std_msgs::msg::dds_::String_",
+      "rt/gpt_state": "std_msgs::msg::dds_::String_",
+      "rt/gptflowfeedback": "std_msgs::msg::dds_::String_",
+      "rt/lf/battery_alarm": "std_msgs::msg::dds_::String_",
+      "rt/lf/lowstate": "unitree_go::msg::dds_::LowState_",
+      "rt/lf/sportmodestate": "unitree_go::msg::dds_::SportModeState_",
+      "rt/lowcmd": "unitree_go::msg::dds_::LowCmd_",
+      "rt/lowstate": "unitree_go::msg::dds_::LowState_",
+      "rt/multiplestate": "std_msgs::msg::dds_::String_",
+      "rt/pet/flowfeedback": "std_msgs::msg::dds_::String_",
+      "rt/programming_actuator/command": "std_msgs::msg::dds_::String_",
+      "rt/public_network_status": "std_msgs::msg::dds_::String_",
+      "rt/qt_add_edge": "unitree_interfaces::msg::dds_::QtEdge_",
+      "rt/qt_add_node": "unitree_interfaces::msg::dds_::QtNode_",
+      "rt/qt_command": "unitree_interfaces::msg::dds_::QtCommand_",
+      "rt/rtc/state": "std_msgs::msg::dds_::String_",
+      "rt/rtc_status": "std_msgs::msg::dds_::String_",
+      "rt/selftest": "std_msgs::msg::dds_::String_",
+      "rt/servicestate": "std_msgs::msg::dds_::String_",
+      "rt/servicestateactivate": "std_msgs::msg::dds_::String_",
+      "rt/sportmodestate": "unitree_go::msg::dds_::SportModeState_",
+      "rt/uslam/client_command": "std_msgs::msg::dds_::String_",
+      "rt/uslam/cloud_map": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/uslam/map_file_pub": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/uslam/server_log": "std_msgs::msg::dds_::String_",
+      "rt/utlidar/cloud": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/cloud_base": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/cloud_deskewed": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/grid_map": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/height_map": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/height_map_array": "unitree_go::msg::dds_::HeightMap_",
+      "rt/utlidar/imu": "sensor_msgs::msg::dds_::Imu_",
+      "rt/utlidar/lidar_state": "unitree_go::msg::dds_::LidarState_",
+      "rt/utlidar/mapping_cmd": "std_msgs::msg::dds_::String_",
+      "rt/utlidar/range_info": "geometry_msgs::msg::dds_::PointStamped_",
+      "rt/utlidar/range_map": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/robot_odom": "nav_msgs::msg::dds_::Odometry_",
+      "rt/utlidar/robot_pose": "geometry_msgs::msg::dds_::PoseStamped_",
+      "rt/utlidar/server_log": "std_msgs::msg::dds_::String_",
+      "rt/utlidar/switch": "std_msgs::msg::dds_::String_",
+      "rt/utlidar/voxel_map": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/voxel_map_compressed": "unitree_go::msg::dds_::VoxelMapCompressed_",
+      "rt/uwbstate": "unitree_go::msg::dds_::UwbState_",
+      "rt/uwbswitch": "unitree_go::msg::dds_::UwbSwitch_",
+      "rt/videohub/inner": "std_msgs::msg::dds_::String_",
+      "rt/webrtcreq": "std_msgs::msg::dds_::String_",
+      "rt/webrtcres": "std_msgs::msg::dds_::String_",
+      "rt/wirelesscontroller": "unitree_go::msg::dds_::WirelessController_",
+      "rt/wirelesscontroller_unprocessed": "unitree_go::msg::dds_::WirelessController_",
+      "rt/xfk_webrtcreq": "std_msgs::msg::dds_::String_",
+      "rt/xfk_webrtcres": "std_msgs::msg::dds_::String_"
+    },
+    "subscriptions": {
+      "DCPSPublication": "org::eclipse::cyclonedds::builtin::DCPSPublication",
+      "DCPSSubscription": "org::eclipse::cyclonedds::builtin::DCPSSubscription",
+      "rt/api/assistant_recorder/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/assistant_recorder/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/audiohub/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/audiohub/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/bashrunner/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/bashrunner/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/config/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/config/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/fourg_agent/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/fourg_agent/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/gas_sensor/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/gesture/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/gpt/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/gpt/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/motion_switcher/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/motion_switcher/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/obstacles_avoid/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/obstacles_avoid/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/pet/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/pet/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/programming_actuator/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/programming_actuator/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/robot_state/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/robot_state/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/slam_operate/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/sport/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/sport/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/sport_lease/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/uwbswitch/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/uwbswitch/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/videohub/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/videohub/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/vla/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/voice/response": "unitree_api::msg::dds_::Response_",
+      "rt/api/vui/request": "unitree_api::msg::dds_::Request_",
+      "rt/api/vui/response": "unitree_api::msg::dds_::Response_",
+      "rt/arm/action/state": "std_msgs::msg::dds_::String_",
+      "rt/arm_Feedback": "unitree_arm::msg::dds_::ArmString_",
+      "rt/audio_msg": "std_msgs::msg::dds_::String_",
+      "rt/audiohub/player/state": "std_msgs::msg::dds_::String_",
+      "rt/audioreceiver": "unitree_go::msg::dds_::AudioData_",
+      "rt/audiosender": "unitree_go::msg::dds_::AudioData_",
+      "rt/config_change_status": "unitree_go::msg::dds_::ConfigChangeStatus_",
+      "rt/frontvideostream": "unitree_go::msg::dds_::Go2FrontVideoData_",
+      "rt/gas_sensor": "std_msgs::msg::dds_::String_",
+      "rt/gesture/result": "std_msgs::msg::dds_::String_",
+      "rt/gptflowfeedback": "std_msgs::msg::dds_::String_",
+      "rt/lf/battery_alarm": "std_msgs::msg::dds_::String_",
+      "rt/lf/bmsstate": "unitree_hg::msg::dds_::BmsState_",
+      "rt/lf/lowstate": "unitree_go::msg::dds_::LowState_",
+      "rt/lf/sportmodestate": "unitree_go::msg::dds_::SportModeState_",
+      "rt/lio_sam_ros2/mapping/odometry": "nav_msgs::msg::dds_::Odometry_",
+      "rt/lowcmd": "unitree_go::msg::dds_::LowCmd_",
+      "rt/lowstate": "unitree_go::msg::dds_::LowState_",
+      "rt/multiplestate": "std_msgs::msg::dds_::String_",
+      "rt/pctoimage_local": "unitree_interfaces::msg::dds_::PcToImage_",
+      "rt/pet/flowfeedback": "std_msgs::msg::dds_::String_",
+      "rt/programming_actuator/feedback": "std_msgs::msg::dds_::String_",
+      "rt/public_network_status": "std_msgs::msg::dds_::String_",
+      "rt/qt_notice": "std_msgs::msg::dds_::String_",
+      "rt/query_result_edge": "unitree_interfaces::msg::dds_::QtEdge_",
+      "rt/query_result_node": "unitree_interfaces::msg::dds_::QtNode_",
+      "rt/rtc/state": "std_msgs::msg::dds_::String_",
+      "rt/selftest": "std_msgs::msg::dds_::String_",
+      "rt/servicestate": "std_msgs::msg::dds_::String_",
+      "rt/slam_info": "std_msgs::msg::dds_::String_",
+      "rt/slam_key_info": "std_msgs::msg::dds_::String_",
+      "rt/sportmodestate": "unitree_go::msg::dds_::SportModeState_",
+      "rt/uslam/client_command": "std_msgs::msg::dds_::String_",
+      "rt/uslam/frontend/cloud_world_ds": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/uslam/frontend/odom": "nav_msgs::msg::dds_::Odometry_",
+      "rt/uslam/localization/cloud_world": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/uslam/localization/odom": "nav_msgs::msg::dds_::Odometry_",
+      "rt/uslam/map_file_sub": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/uslam/navigation/global_path": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/uslam/server_log": "std_msgs::msg::dds_::String_",
+      "rt/utlidar/client_command": "std_msgs::msg::dds_::String_",
+      "rt/utlidar/cloud": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/cloud_deskewed": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/height_map_array": "unitree_go::msg::dds_::HeightMap_",
+      "rt/utlidar/lidar_state": "unitree_go::msg::dds_::LidarState_",
+      "rt/utlidar/range_info": "geometry_msgs::msg::dds_::PointStamped_",
+      "rt/utlidar/robot_pose": "geometry_msgs::msg::dds_::PoseStamped_",
+      "rt/utlidar/switch": "std_msgs::msg::dds_::String_",
+      "rt/utlidar/voxel_map": "sensor_msgs::msg::dds_::PointCloud2_",
+      "rt/utlidar/voxel_map_compressed": "unitree_go::msg::dds_::VoxelMapCompressed_",
+      "rt/uwbstate": "unitree_go::msg::dds_::UwbState_",
+      "rt/videohub/inner": "std_msgs::msg::dds_::String_",
+      "rt/webrtcreq": "std_msgs::msg::dds_::String_",
+      "rt/webrtcres": "std_msgs::msg::dds_::String_",
+      "rt/wirelesscontroller": "unitree_go::msg::dds_::WirelessController_",
+      "rt/wirelesscontroller_unprocessed": "unitree_go::msg::dds_::WirelessController_",
+      "rt/xfk_webrtcreq": "std_msgs::msg::dds_::String_",
+      "rt/xfk_webrtcres": "std_msgs::msg::dds_::String_"
+    }
+  },
+  "finished_at": "2026-11-11T06:26:25.520468+00:00"
+}
