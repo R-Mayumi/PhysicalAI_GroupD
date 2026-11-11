@@ -1,0 +1,4 @@
+NAME               ID              SIZE      MODIFIED       
+qwen3:4b-q4_K_M    2bfd38a7daaf    2.6 GB    15 minutes ago    
+qwen3.5:4b         e0b8c85c75aa    3.3 GB    9 days ago        
+qwen2.5:3b         357c53fb659c    1.9 GB    2 weeks ago       
