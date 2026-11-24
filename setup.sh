@@ -25,9 +25,11 @@ if [[ "$source_dir" != "$target_dir" ]]; then
         mkdir -p "$backup_dir"
         cp -p "$target_dir/go2_voice.py" "$backup_dir/"
     fi
-    for filename in go2_voice.py requirements.txt dependencies.lock.json README.md setup.sh; do
+    for filename in go2_voice.py go2_teleop.py go2_lidar.py requirements.txt dependencies.lock.json README.md setup.sh; do
         cp "$source_dir/$filename" "$target_dir/$filename"
     done
+    mkdir -p "$target_dir/docs"
+    cp "$source_dir/docs/go2_lidar_calibration.example.json" "$target_dir/docs/"
 fi
 
 # 接続先の個別設定は既存の.envを上書きしません。

@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import re
 import shlex
+import socket
 import subprocess
 import sys
 import threading
@@ -130,7 +131,8 @@ def configured_network_interface():
 class Robot:
     """SDKの接続・状態受信・停止処理をまとめたクラスです。"""
 
-    def __init__(self, net_if, monitor_enabled=True, allowed_state_code=None):
+    def __init__(self, net_if, monitor_enabled=True, allowed_state_code=None, *,
+                 read_only=None, require_ready=True):
         if allowed_state_code not in (None, 100):
             raise ValueError("個別に許可できる状態コードは100だけです。")
         self.client = None
@@ -142,7 +144,19 @@ class Robot:
         self.watchdog_end = threading.Event()
         self.watchdog = None
         self.stop_failed = False
+        self.read_only = not monitor_enabled if read_only is None else read_only
+        if not require_ready and not self.read_only:
+            raise ValueError("状態異常を許容できるのは読み取り専用の場合だけです。")
+        self.command_lock = threading.Lock()
+        self.motion_socket = None
         try:
+            if not self.read_only:
+                # Linuxの同一ホストでは音声操作とキー操作の送信担当を兼用しない。
+                self.motion_socket = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
+                try:
+                    self.motion_socket.bind("\0pyhai-go2-motion")
+                except OSError as exc:
+                    raise RuntimeError("Go2に指令を送る別のプロセスが実行中か確認してください。") from exc
             from unitree_sdk2py.core.channel import ChannelFactoryInitialize, ChannelSubscriber
             from unitree_sdk2py.idl.unitree_go.msg.dds_ import SportModeState_
             from unitree_sdk2py.go2.sport.sport_client import SportClient
@@ -169,7 +183,8 @@ class Robot:
             # 非ゼロ値を正常とは解釈しません。明示指定された開始時の値だけを固定します。
             expected_code = 100 if allowed_state_code == 100 and state["error_code"] == 100 else 0
             self.guard = SafetyGuard(state["position"], expected_error_code=expected_code)
-            self.guard.check(state, time.monotonic())
+            if require_ready:
+                self.guard.check(state, time.monotonic())
             if expected_code:
                 print("注意：意味が未確認の状態コード100を明示指定により許可しています。"
                       "正常動作を保証するものではありません。コードが変わった場合は停止します。")
@@ -177,7 +192,7 @@ class Robot:
             print("現在位置を基準にします。移動指令は起動中の合計25cmまでです。")
             # 音声認識・LLMの処理中にも状態を監視します。
             # 停止後の自動再開はせず、安全停止を記憶します。
-            if monitor_enabled:
+            if monitor_enabled and not self.read_only:
                 self.watchdog = threading.Thread(target=self.monitor, daemon=True)
                 self.watchdog.start()
         except BaseException:
@@ -187,7 +202,8 @@ class Robot:
     def receive(self, message, topic):
         state = {"received": time.monotonic(), "position": list(message.position),
                  "velocity": list(message.velocity), "mode": message.mode,
-                 "error_code": message.error_code, "yaw_speed": message.yaw_speed}
+                 "error_code": message.error_code, "yaw_speed": message.yaw_speed,
+                 "rpy": tuple(message.imu_state.rpy)}
         with self.lock:
             self.states[topic] = state
 
@@ -198,14 +214,32 @@ class Robot:
             raise SafetyError("Go2の状態がありません。")
         return state
 
-    def request(self, method, *values):
+    def final_gate(self, method, *values, permitted=False, expires_at=None):
+        with self.command_lock:
+            if self.read_only:
+                raise SafetyError("読み取り専用の接続では指令を送信できません。")
+            if method != self.client.StopMove and not (method == self.client.Move and values == (0, 0, 0)):
+                if not permitted:
+                    raise SafetyError("安全監視が指令を許可していません。")
+                self.guard.check(self.state(), time.monotonic())
+                if expires_at is None or time.monotonic() >= expires_at:
+                    raise SafetyError("動作指令の期限が切れています。")
+            self.command_sender(method, *values)
+
+    def command_sender(self, method, *values):
         code = method(*values)
         if code != 0:
             raise RuntimeError(f"Go2の指令が失敗しました。API：{method.__name__}、応答コード：{code}")
 
-    def stop(self):
+    def stop(self, *, zero_velocity=False):
         if self.client is not None:
-            self.request(self.client.StopMove)
+            if not zero_velocity:
+                self.final_gate(self.client.StopMove)
+                return
+            try:
+                self.final_gate(self.client.Move, 0, 0, 0)
+            finally:
+                self.final_gate(self.client.StopMove)
 
     def monitor(self):
         while not self.watchdog_end.wait(0.05):
@@ -233,11 +267,13 @@ class Robot:
         self.guard.check(self.state(), time.monotonic())
         if intent in ("stand", "sit"):
             try:
-                self.request(self.client.StandUp if intent == "stand" else self.client.StandDown)
+                self.final_gate(self.client.StandUp if intent == "stand" else self.client.StandDown,
+                                permitted=True, expires_at=time.monotonic() + SEND_INTERVAL)
                 if intent == "stand":
                     time.sleep(1.0)
                     self.guard.check(self.state(), time.monotonic())
-                    self.request(self.client.BalanceStand)
+                    self.final_gate(self.client.BalanceStand, permitted=True,
+                                    expires_at=time.monotonic() + SEND_INTERVAL)
             finally:
                 self.stop()
             print("姿勢の変更要求が成功しました。実際の姿勢を確認してください。")
@@ -250,12 +286,14 @@ class Robot:
         before = self.state()
         print(f"実行：{LABELS[intent]}、直進速度 {x:g} m/s、旋回速度 {yaw:g} rad/s、{duration:.2f}秒")
         try:
-            self.request(self.client.BalanceStand)
+            self.final_gate(self.client.BalanceStand, permitted=True,
+                            expires_at=time.monotonic() + SEND_INTERVAL)
             deadline = time.monotonic() + duration
             while time.monotonic() < deadline:
                 self.guard.check(self.state(), time.monotonic())
                 # Moveの成功は「送信成功」であり、実際の移動成功ではありません。
-                self.request(self.client.Move, x, 0.0, yaw)
+                self.final_gate(self.client.Move, x, 0.0, yaw, permitted=True,
+                                expires_at=min(deadline, time.monotonic() + SEND_INTERVAL))
                 time.sleep(min(SEND_INTERVAL, max(0.0, deadline - time.monotonic())))
         finally:
             # 正常終了・エラー・Ctrl+Cのいずれの場合も停止を要求します。
@@ -272,9 +310,14 @@ class Robot:
         self.watchdog_end.set()
         if self.watchdog is not None:
             self.watchdog.join(timeout=4.0)
-        for sub in self.subscribers:
-            sub.Close()
-        self.subscribers.clear()
+        try:
+            for sub in self.subscribers:
+                sub.Close()
+            self.subscribers.clear()
+        finally:
+            if self.motion_socket is not None:
+                self.motion_socket.close()
+                self.motion_socket = None
 
 
 def classify(text, model):

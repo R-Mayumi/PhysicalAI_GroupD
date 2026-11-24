@@ -6,6 +6,47 @@ Whisperで音声を日本語のテキストにし、OllamaでGo2への指示に�
 
 音声操作の自作コードは `go2_voice.py` の1ファイルです。以前のデモやヘルパーファイルは読み込みません。カメラ表示は別の `make_code/go2_camera.py` で実行します。
 
+## LiDARを使ったキー操作
+
+`go2_teleop.py` はUbuntu上で操作し、Go2の内蔵LiDARと運動状態を有線DDSで受信します。Spaceを押しながら方向キーを1つ押している間だけ速度指令を送ります。
+
+| キー | 動作 |
+|---|---|
+| `Space` + `W` / `S` | 前進 / 後退 |
+| `Space` + `A` / `D` | 左並進 / 右並進 |
+| `Space` + `Q` / `E` | 左旋回 / 右旋回 |
+| `Esc` | 停止して終了 |
+
+キーを離す、障害物や未観測域が進行先にある、点群や運動状態が古い、のいずれかで速度をゼロにし、移動中なら `StopMove` も要求します。停止後はSpaceと方向キーをすべて離してから再入力します。並進は0.08 m/s、旋回は0.15 rad/sです。既存の開始位置と累積並進指令の25cm制限を使います。キー操作と音声操作は同一Linuxホストで同時に起動できません。
+
+### 実機の設定と読み取り確認
+
+1. Go2を有線接続し、状態コードが0で、平坦な床の上に立っていることを確認します。調査時のコード `1001` が現在も出る場合、キー操作は開始できません。
+2. `docs/go2_lidar_calibration.example.json` を `go2_lidar_calibration.json` にコピーし、実機の値に合わせます。`lidar_xyz_m` は機体原点から見たセンサー原点、`lidar_rpy_rad` は点群座標から機体座標への姿勢（Xロール、Yピッチ、Zヨー）です。機体の+Xが前、+Yが左、+Zが上です。`ground_z_m` は立位での機体原点に対する平坦な床の高さです。サンプルの取付値は公式URDFの `radar_joint`、床面値は仮値です。実際の `utlidar_lidar` 座標に適合するか、床と位置が分かっている障害物を前後左右に置き、点群表示と照合してください。 [公式URDF](https://github.com/unitreerobotics/unitree_ros/blob/master/robots/go2_description/urdf/go2_description.urdf) [公式RViz手順](https://github.com/unitreerobotics/unitree_ros2#rviz)
+3. 次の診断で点群受信、自機点数、床面と障害物の格子数、6方向の判定を確認します。Go2への動作指令は送信しません。
+
+```bash
+.venv/bin/python go2_teleop.py --check --calibration go2_lidar_calibration.json
+```
+
+障害物のない場所と、進行先に障害物を置いた状態を静止した機体で比較します。背面などで床点が不足すると、その方向の指令は停止になります。実機でキー操作を試すときは、リモコンで停止できる状態を確保し、開けた床でキー解放時の制動距離と停止時間を各方向で測ってください。
+
+```bash
+ls -l /dev/input/by-id/*-event-kbd
+.venv/bin/python go2_teleop.py --drive --calibration go2_lidar_calibration.json \
+  --keyboard /dev/input/by-id/対象キーボード-event-kbd
+```
+
+コマンド中のデバイス名は対象キーボードの実際のパスに置き換えます。プログラムは指定デバイスの物理キー状態を直接読み取るため、端末のフォーカスを外してもSpaceと方向キーの組み合わせが有効です。読み取り権限のある操作専用キーボードを使用してください。ネットワーク設定の優先順位は音声操作と共通です。Whisper・Ollama・ROS 2の起動は不要です。
+
+### ワールドモデルと安全監視
+
+PointCloud2の各フィールドからXYZを復号し、LiDARの取付変換とIMU姿勢で点群を補正します。既知の胴体内部の反射点を除き、姿勢と位置で直近0.4秒の点群を同じ局所座標にそろえます。床面の直接観測と障害物を5cm格子に保持します。障害物点が入った格子は占有扱いとし、床の点だけでは占有を解除しません。
+
+安全監視では停止までに機体外形が通る範囲を、並進と旋回の両方で照合します。初期設定は機体外形80×48cm、停止を見込む時間0.85秒、固定の余裕5cmに加えて測距3.5cm、位置合わせ3cm、格子・スキャン中・履歴のずれの余裕を加えます。これらは実測前の値です。実機の脚の可動範囲、搭載物、通信遅延、制動距離を確認してください。透明物、細い物、低い物体、死角は単一LiDARで検出できるとは限りません。通信断によって停止指令が届かない場合もあります。 [Unitree LiDAR L2仕様](https://oss-global-cdn.unitree.com/static/Unitree%204D%20LiDAR%20L2%20User%20Manual.pdf)
+
+`docs/architecture.md` の構成のうち、点群処理・機体状態監視・ワールドモデル・安全監視・最終判定・送信を実装しています。この操作の入力はキーで、ワールドモデルのメッセージはPythonのデータクラスです。カメラとの融合、経路計画、ROS 2メッセージ化は現時点の実装範囲外です。SDKの指令送信は音声操作と同じ `Robot` に集約しています。 [公式の速度指令サンプル](https://github.com/unitreerobotics/unitree_sdk2_python/blob/master/example/go2/high_level/go2_sport_client.py)
+
 ## カメラ映像を取得・表示する
 
 Go2とPCを有線で接続し、PCのGo2側NICに `192.168.123.99/24` などGo2と通信できる未使用のIPv4アドレスを設定してください。NIC名とアドレスは `ip -br -4 addr` で確認できます。プロジェクト直下の `.env` にある `GO2_NET_IF` を利用します。指定の優先順位は `--net-if`、環境変数 `GO2_NET_IF`、プロジェクト直下の `.env`、`192.168.123.0/24` のNICの自動検出です。環境変数を空にすると `.env` を使わず自動検出します。
