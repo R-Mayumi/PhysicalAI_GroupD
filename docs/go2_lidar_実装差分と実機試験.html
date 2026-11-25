@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Go2 LiDARキー操作｜実装差分と実機試験</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182922;
+      --muted: #485e54;
+      --accent: #176452;
+      --line: #cbd9d2;
+      --paper: #fff;
+      --shade: #f0f6f2;
+      --attention: #fff3d9;
+      font-family: "Yu Gothic UI", "Hiragino Sans", Meiryo, sans-serif;
+      line-height: 1.7;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #e9f0ec; color: var(--ink); }
+    main { max-width: 1100px; margin: 0 auto; background: var(--paper); }
+    header, section, nav { padding-inline: clamp(18px, 5vw, 64px); }
+    header { padding-block: 45px 36px; color: #fff; background: #163b32; }
+    header p { max-width: 46em; margin-bottom: 0; }
+    header time { color: #cae1d6; font-variant-numeric: tabular-nums; }
+    h1 { margin: .3em 0 .2em; font-size: clamp(1.8rem, 4vw, 2.65rem); line-height: 1.25; }
+    h2 { margin: 0 0 .72em; padding-bottom: .28em; border-bottom: 2px solid var(--accent); font-size: 1.45rem; }
+    h3 { margin: 1.35em 0 .45em; font-size: 1.12rem; }
+    p, li { overflow-wrap: anywhere; }
+    p { margin: .6em 0; }
+    nav { display: flex; flex-wrap: wrap; gap: .4em 1.4em; padding-block: 14px; background: var(--shade); }
+    a { color: var(--accent); text-underline-offset: .18em; }
+    a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    section { padding-block: 28px; }
+    section + section { border-top: 1px solid var(--line); }
+    .notice { padding: .75em 1em; background: var(--attention); border-left: 4px solid #926719; }
+    .flow { margin: .8em 0; padding: .55em .9em; background: var(--shade); border-left: 4px solid var(--accent); }
+    .note { color: var(--muted); font-size: .93rem; }
+    .table-wrap { overflow-x: auto; margin-block: .7em 1em; }
+    table { width: 100%; border-collapse: collapse; font-size: .94rem; }
+    .table-wrap table { min-width: 650px; }
+    th, td { padding: .6em .65em; border: 1px solid var(--line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+    thead th { background: #e4efe8; }
+    tbody th { background: #f7faf8; font-weight: 650; }
+    .changes th[scope="row"] { width: 19%; }
+    .tests th[scope="row"] { width: 20%; }
+    .tests td { width: 40%; }
+    ul, ol { padding-inline-start: 1.6em; }
+    li + li { margin-top: .36em; }
+    code, kbd { font-family: Consolas, "Courier New", monospace; font-size: .92em; }
+    code { color: #153c30; background: #eaf3ed; padding: .08em .25em; border-radius: 3px; }
+    pre { overflow-x: auto; padding: .7em .9em; background: #edf5ef; border: 1px solid var(--line); line-height: 1.45; }
+    pre code { background: none; padding: 0; }
+    kbd { display: inline-block; border: 1px solid #a0b9aa; padding: 0 .28em; border-radius: 3px; background: #f5f9f6; }
+    .records td { height: 2.45em; }
+    @media (max-width: 650px) {
+      header { padding-block: 32px 26px; }
+      section { padding-block: 22px; }
+    }
+    @media print {
+      @page { size: A4; margin: 12mm; }
+      :root { line-height: 1.48; }
+      body, header { color: #111; background: #fff; }
+      header time { color: #222; }
+      header, section { padding-inline: 0; padding-block: 10px; }
+      nav { display: none; }
+      h1 { font-size: 23pt; }
+      h2, h3 { break-after: avoid; }
+      .table-wrap { overflow: visible; }
+      .table-wrap table { min-width: 0; }
+      tr, pre, .notice { break-inside: avoid; }
+      pre { white-space: pre-wrap; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <time datetime="2026-11-25">2026年11月25日</time>
+    <h1>Go2 LiDARキー操作<br>実装差分と実機試験</h1>
+    <p>前回の変更がどの判断を追加したかを説明し、Ubuntu PCとGo2を使った確認手順、合格条件、記録項目をまとめます。</p>
+  </header>
+  <nav aria-label="目次">
+    <a href="#summary">現在の到達点</a>
+    <a href="#changes">変更と意図</a>
+    <a href="#architecture">構成図との差分</a>
+    <a href="#tests">実機試験の実行手順</a>
+    <a href="#record">記録用紙</a>
+  </nav>
+
+  <section id="summary" aria-labelledby="summary-title">
+    <h2 id="summary-title">現在の到達点</h2>
+    <p class="flow">物理キーの押下状態 → 速度候補 → LiDARと機体状態で照合 → 指令の最終判定 → Unitree SDKで送信</p>
+    <p>模擬点群とモックによる新規・音声回帰テストは前回20件が通過しました。模擬試験では、前方障害物で後退が妨げられないこと、左右の旋回で判定が分かれること、操作中の障害物追加・キー解放・点群途絶で停止処理に入ることを確認しました。既存カメラのテストは検証環境にOpenCVがなく未実施です。 <a href="../test_go2_teleop.py">キー操作・点群テスト</a>　<a href="../test_go2_voice.py">音声回帰テスト</a></p>
+    <p class="notice"><strong>実機走行は未検証。</strong> 2026年11月11日の調査ではLiDAR点群が約15.4 Hzで受信でき、運動状態コードは <code>1001</code> でした。今回のキー操作はコード <code>0</code> を要求します。現在のコードと点群は現地で再取得し、取付変換・死角・制動を確認するまで走行判定は保留します。 <a href="Go2_外部プログラム利用機能調査.md">実機調査記録</a></p>
+  </section>
+
+  <section id="changes" aria-labelledby="changes-title">
+    <h2 id="changes-title">変更と意図</h2>
+    <div class="table-wrap" role="region" aria-label="コード差分の一覧" tabindex="0">
+      <table class="changes">
+        <thead><tr><th scope="col">変更箇所</th><th scope="col">追加・変更した処理</th><th scope="col">修正の意図</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">キー入力<br><a href="../go2_teleop.py">go2_teleop.py</a></th><td><code>Keyboard</code> がLinuxの入力デバイスから押下状態を直接取得。<kbd>Space</kbd> と方向キー1つで操作し、送信直前にもう一度読みます。</td><td>押し始めと解放を検出して、キーを押している間だけ指令を有効にします。組み合わせを1つに絞り、意図しない斜め移動や旋回の同時入力を防ぎます。端末のフォーカスを外しても指定デバイスを読むため、専用キーボードを使います。</td></tr>
+          <tr><th scope="row">速度候補と停止<br><a href="../go2_teleop.py">go2_teleop.py</a></th><td><code>ManualControl</code> が前後・左右並進を0.08 m/s、左右旋回を0.15 rad/sに固定。停止時は移動中であればゼロ速度と <code>StopMove</code> を送り、キーがすべて離れるまで再開を抑止します。</td><td>操作を6方向の小さな動きに限定し、障害物が消えたり通信が戻ったりしたときに、押しっぱなしのキーで動き出すことを防ぎます。開始位置からの25 cm制限と、起動中に送る並進指令の累積25 cm制限も適用します。</td></tr>
+          <tr><th scope="row">LiDAR受信<br><a href="../go2_teleop.py">go2_teleop.py</a>／<a href="../go2_lidar.py">go2_lidar.py</a></th><td><code>LidarInput</code> がDDSの <code>rt/utlidar/cloud</code> を購読。コールバックは最新点群と受信時の機体状態を渡し、<code>cloud_xyz</code> が <code>PointCloud2</code> のXYZ位置、型、バイト順、データ長、フレーム名を検査します。</td><td>既存調査で受信できた経路を使い、古いフレームを順に処理する遅延を抑えます。固定バイト位置や別座標系の誤読で、障害物の左右・高さを取り違えることを防ぎます。 <a href="https://github.com/unitreerobotics/unitree_ros2#rviz">Unitreeの点群表示手順</a></td></tr>
+          <tr><th scope="row">座標・床面・自機点<br><a href="../go2_lidar.py">go2_lidar.py</a>／<a href="go2_lidar_calibration.example.json">設定例</a></th><td><code>Calibration</code> と <code>pointcloud</code> が取付位置・姿勢、IMU姿勢、機体位置を反映。既知の胴体の衝突形状内部にある点を自機点として数え、残りを床面と占有に分類します。</td><td>センサーに対する測距を機体の前・左・上に対応づけ、床面や胴体で毎回停止しないようにします。自機除外は胴体内部に絞り、脚は走行時の外形に含めて評価します。設定例のURDF由来の取付値と仮の床面高さは、実測後に採否を決めます。 <a href="https://github.com/unitreerobotics/unitree_ros/blob/master/robots/go2_description/urdf/go2_description.urdf">Go2公式URDF</a></td></tr>
+          <tr><th scope="row">機体状態と地図の更新<br><a href="../go2_lidar.py">go2_lidar.py</a></th><td><code>state_monitor</code> が状態コード・姿勢・速度・鮮度を検査。<code>LocalMap</code> が同じ局所座標へそろえた直近0.4秒を5 cm格子に統合します。点群の発行時刻の逆行や位置・向きの急変時は履歴を破棄します。</td><td>単一フレームの欠落を短い履歴で補いながら、古い床面観測で通行を許可する時間を制限します。床面点は地面を観測した証拠として使い、同じ格子で検出した障害物を床面点だけで消しません。点群と機体状態はPC受信時刻近傍で対応づけています。</td></tr>
+          <tr><th scope="row">方向別の衝突判定<br><a href="../go2_lidar.py">go2_lidar.py</a></th><td><code>safety_monitor</code> が並進先の長方形と旋回中の外周を判定。80×48 cmの機体外形を0.85秒先まで見込み、固定余裕5 cm、測距3.5 cm、位置合わせ3 cm、格子と時刻ずれの余裕を加えます。</td><td>壁から離れる操作と壁に近づく操作を区別し、中心がその場に留まる旋回でも角や脚の接触を防ぐ設計です。進行先に観測できていない床があれば保守的に止めます。寸法や余裕は初期値で、実機計測に照らして評価します。</td></tr>
+          <tr><th scope="row">最終判定と送信<br><a href="../go2_voice.py">go2_voice.py</a></th><td><code>Robot.final_gate</code> で許可、状態と指令期限を再確認し、<code>command_sender</code> に送信を集約。音声とキー操作が同じLinuxホストで同時に送信しないよう排他を追加し、既存の状態受信にIMU姿勢を含めました。</td><td>チェック済みの指令だけを送り、処理が遅れて期限を過ぎた速度が実行されるのを防ぎます。停止要求は動作許可が下りない状況でも送信できます。SDKの送信結果と機体が物理的に停止したかは、試験で別々に確認します。 <a href="https://github.com/unitreerobotics/unitree_sdk2_python/blob/master/example/go2/high_level/go2_sport_client.py">Unitree公式の速度指令例</a></td></tr>
+          <tr><th scope="row">診断・配置・テスト<br><a href="../README.md">README.md</a>／<a href="../setup.sh">setup.sh</a>／<a href="../test_go2_teleop.py">test_go2_teleop.py</a></th><td><code>--check</code> と <code>--drive</code> を分け、セットアップ先に新規コードと設定例を配置。模擬点群、押下・解放、送信期限のテストを追加しました。</td><td>実機を動かす前に、座標・受信状態と6方向の可否を診断できるようにします。実機を使わずに再現できる条件を自動テストに残し、現地では校正と実際の制動に集中します。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="architecture" aria-labelledby="architecture-title">
+    <h2 id="architecture-title">構成図との差分</h2>
+    <div class="table-wrap" role="region" aria-label="構成図との差分の一覧" tabindex="0">
+      <table class="changes">
+        <thead><tr><th scope="col">構成図の機能</th><th scope="col">今回の扱いと理由</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">音声・LLMの入力</th><td>キー操作ではキーの押下状態から固定の速度候補を生成します。入力を離したら止まる条件を、WhisperやOllamaの処理時間から独立させるためです。既存の音声経路には今回のLiDAR判定を接続していません。</td></tr>
+          <tr><th scope="row">カメラ・LiDARの融合</th><td><code>fusion</code> に相当する最新観測はLiDAR由来です。まずセンサー1系統で座標・時刻・停止判断を測定しやすくしました。最新の障害物観測を安全判定に反映します。カメラの時刻合わせ、YOLO、異種センサー融合は未実装です。</td></tr>
+          <tr><th scope="row">ワールドモデルのmsg</th><td><code>Pose</code>・<code>Observation</code>・<code>WorldModel</code> をPythonのデータクラスとして同一プロセス内に保持します。機体状態は検査後に取り込みます。今回の手動操作に必要な点群と姿勢を扱える形に絞ったため、構成図のROS 2メッセージ化、加速度、LLMへの抜粋配信は未実装です。</td></tr>
+          <tr><th scope="row">経路計画と運動制御</th><td>方向は操作者が選び、制御側はその速度候補を通すか停止するかを判断します。障害物を避ける別経路の提案、速度のなめらかな制御、停止完了の自動判定は今回の実装に含みません。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">構成図は参照資料として扱い、更新は行っていません。 <a href="architecture.md">システム構成図と設計上の制約</a></p>
+  </section>
+
+  <section id="tests" aria-labelledby="tests-title">
+    <h2 id="tests-title">実機試験の実行手順</h2>
+    <p class="notice">UbuntuのBashで、番号順にコードブロックを1つずつ実行します。設置・キー操作・合否確認が書いてあるところでは、コマンドを止めてその作業を行います。01〜05は機体を動かさずに実施します。06以降は、状態コード0、取付校正、対象方向の判定、リモコンでの停止操作を確認した場合に進みます。</p>
+    <p class="note"><a href="#test-01">準備</a> → <a href="#test-02">通信</a> → <a href="#test-03">校正</a> → <a href="#test-04">静止診断</a> → <a href="#test-06">キー操作</a> → <a href="#test-07">制動計測</a> → <a href="#test-08">障害物停止</a> → <a href="#test-09">25 cm制限</a> → <a href="#test-10">受信異常</a> → <a href="#test-11">終了・競合</a></p>
+
+    <h3 id="test-01">01　作業場所・接続・ログの準備</h3>
+    <ol>
+      <li>平坦で滑りにくい床を選び、ケーブルを脚の通り道から外します。Go2を立位にし、公式アプリの警告、機種とファームウェアを記録します。操作者とは別にリモコンを持つ停止担当を決め、停止操作を静止状態で確認します。</li>
+      <li>Ubuntuの端末Aで次を実行します。配置先が異なる場合は、最初の行を <code>go2_teleop.py</code> がある場所に置き換えます。<code>ls</code> で3つとも表示されたら進みます。 <a href="../README.md">配置と依存環境</a></li>
+    </ol>
+    <pre><code>cd "$HOME/pyhai_go2_workspace"
+ls -l .venv/bin/python go2_teleop.py docs/go2_lidar_calibration.example.json
+ip -br -4 addr</code></pre>
+    <p>出力の中からGo2の有線側インターフェースを選びます。次のブロックの最初の入力欄へ、そのインターフェース名を貼り付けます。以降は同じ端末Aを使います。</p>
+    <pre><code>read -r -p 'Go2に接続した有線NICの名前: ' GO2_TEST_NIC
+ip -4 addr show dev "$GO2_TEST_NIC"
+GO2_TEST_CAL="$PWD/go2_lidar_calibration.json"
+GO2_TEST_LOG=$(mktemp -d "$PWD/go2-test-$(date +%Y%m%d-%H%M%S)-XXXXXX")
+if [[ ! -e "$GO2_TEST_CAL" ]]; then
+  cp docs/go2_lidar_calibration.example.json "$GO2_TEST_CAL"
+fi
+printf '作業場所 %s\n校正ファイル %s\nログ保存先 %s\n' "$PWD" "$GO2_TEST_CAL" "$GO2_TEST_LOG"
+
+go2_check() {
+  local label="$1" rc log
+  log=$(mktemp --suffix=.log "$GO2_TEST_LOG/$label-XXXXXX") || return
+  printf '保存先 %s\n' "$log"
+  .venv/bin/python -u go2_teleop.py --check --net-if "$GO2_TEST_NIC" \
+    --calibration "$GO2_TEST_CAL" 2&gt;&amp;1 | tee "$log"
+  rc=${PIPESTATUS[0]}
+  printf '終了コード %s\n' "$rc" | tee -a "$log"
+  return "$rc"
+}</code></pre>
+    <p><strong>進む条件。</strong> 指定NICにGo2と通信できるIPv4アドレスがあり、表示されたログ保存先が存在すること。設定例からコピーした取付値と床面高さは03で照合します。</p>
+
+    <h3 id="test-02">02　動作指令を送らずに通信を確認</h3>
+    <pre><code>go2_check 02-first
+for n in 1 2 3; do
+  go2_check "02-repeat-$n" || break
+  sleep 1
+done</code></pre>
+    <p><strong>期待する出力。</strong> <code>運動状態コード 0</code>、<code>点群受信 'utlidar_lidar'</code>、<code>点群更新成功</code> と6方向の結果。診断の終了コード0は地図の更新を示します。方向ごとの可否は、その行の表示で判断します。</p>
+    <ul>
+      <li><code>1001</code> など非ゼロが出たら走行試験を保留し、本体と公式アプリを確認します。点群を受信できていても、この状態で移動は許可されません。</li>
+      <li>点群は受信したものの床面不足で更新できない場合は03で校正し、02をやり直します。点群自体が届かない場合はNICと有線接続を確認します。</li>
+      <li>ソース一式を配置していて受信頻度も記録したい場合は、次を実行します。JSONの各トピックにある <code>count</code> と <code>approx_hz</code> が確認対象です。<code>--check</code> は鮮度超過や発行時刻異常を拒否します。各サンプルの受信間隔の最大値が必要な場合は、読み取り専用のDDS購読ログを別途採取します。 <a href="../tools/physical_ai/check_go2_sensors.py">受信確認ツール</a></li>
+    </ul>
+    <pre><code>if [[ -f tools/physical_ai/check_go2_sensors.py ]]; then
+  .venv/bin/python tools/physical_ai/check_go2_sensors.py --net-if "$GO2_TEST_NIC" \
+    --seconds 8 --output "$GO2_TEST_LOG/02-sensors.json"
+fi</code></pre>
+
+    <h3 id="test-03">03　取付変換を確認し、床面高さを入力する</h3>
+    <ol>
+      <li>床に機体原点の真下と、前・左の向きをテープで示します。立位で床から機体原点までの高さを測り、その値をメートルにして負号を付けたものを <code>ground_z_m</code> に入れます。例えば高さ32 cmなら <code>-0.32</code> です。</li>
+      <li>機体原点から既知の距離に板を1枚ずつ置き、前・後・左・右を比較します。点群を機体座標に変換して確認できる環境では、前が+X、左が+Y、上が+Zで、板の位置と計測値が整合することを確認します。RVizの固定フレームを <code>utlidar_lidar</code> にした表示はセンサー座標です。機体座標の照合には別途取付変換を適用します。 <a href="https://github.com/unitreerobotics/unitree_ros2#rviz">Unitreeの点群表示手順</a></li>
+      <li>取付位置 <code>lidar_xyz_m</code> と取付姿勢 <code>lidar_rpy_rad</code> を確認し、必要に応じて編集します。板を撤去してから <code>go2_check 03-calibrated</code> を実行します。設定値と、床面・板の位置残差を記録します。 <a href="go2_lidar_calibration.example.json">設定例</a></li>
+    </ol>
+    <pre><code>nano "$GO2_TEST_CAL"
+.venv/bin/python -m json.tool "$GO2_TEST_CAL"
+go2_check 03-calibrated
+cp "$GO2_TEST_CAL" "$GO2_TEST_LOG/calibration-used.json"</code></pre>
+    <p class="note"><code>nano</code> では <kbd>Ctrl</kbd>＋<kbd>O</kbd>、<kbd>Enter</kbd> で保存し、<kbd>Ctrl</kbd>＋<kbd>X</kbd> で戻ります。構文検査はJSONの形式を検証します。取付の合否は実測位置との照合で判定します。</p>
+    <p>RVizの <code>utlidar_lidar</code> 座標で板上の点を選べる場合は、表示されたXYZをメートルで入力すると、設定ファイルの取付変換を適用した機体座標を確認できます。水平で静止した状態で、実測した符号と距離に照らし合わせます。</p>
+    <pre><code>read -r -p '板上の点のセンサー座標 X Y Z (m、空白区切り): ' GO2_X GO2_Y GO2_Z
+.venv/bin/python - "$GO2_TEST_CAL" "$GO2_X" "$GO2_Y" "$GO2_Z" &lt;&lt;'PY'
+from pathlib import Path
+import sys
+from go2_lidar import Calibration
+
+calibration = Calibration.load(Path(sys.argv[1]))
+point = tuple(map(float, sys.argv[2:]))
+body = [origin + sum(a * b for a, b in zip(row, point))
+        for row, origin in zip(calibration.matrix, calibration.xyz)]
+print('機体座標 [m]  X前 {:+.3f}  Y左 {:+.3f}  Z上 {:+.3f}'.format(*body))
+PY</code></pre>
+
+    <h3 id="test-04">04〜05　障害物の位置だけを変え、静止診断を比較する</h3>
+    <p>機体は立位静止のままにします。下のループは配置ごとに入力待ちになります。配置が終わり全員がセンサーの前から離れたら、端末Aで <kbd>Enter</kbd> を押してください。板を交換するたびに、直前の板は撤去します。</p>
+    <pre><code>for placement in empty front rear left right front-left front-right; do
+  read -r -p "配置 $placement を準備したら Enter: " GO2_TEST_READY
+  go2_check "05-$placement"
+done</code></pre>
+    <div class="table-wrap" role="region" aria-label="静止診断の板の置き方と期待結果" tabindex="0">
+      <table class="tests">
+        <thead><tr><th scope="col">配置</th><th scope="col">板の位置</th><th scope="col">見る行</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>empty</code></th><td>板を外し、周囲の床が見える状態にする。</td><td>6方向の基準結果を記録。未観測が出た方向は保留。</td></tr>
+          <tr><th scope="row"><code>front</code> / <code>rear</code></th><td>板の面を機体に向け、前または後ろの中央に置く。開始目安は機体原点から約55 cm。板は外形や脚から離す。</td><td>前の板は前進、後ろの板は後退の行で <code>障害物があります</code>。反対側は床が観測できる場合に許可。</td></tr>
+          <tr><th scope="row"><code>left</code> / <code>right</code></th><td>板を左または右の中央に置く。開始目安は機体原点から約38 cm。</td><td>板の側への並進が拒否される。反対側との違いを記録。</td></tr>
+          <tr><th scope="row"><code>front-left</code> / <code>front-right</code></th><td>板を前角の斜め外側に置く。位置を少しずつ変え、左右それぞれの判定を比べる。</td><td>機体の角が近づく旋回を拒否。左右とも拒否された場合は判定理由を確認し、板の位置と未観測域を分けて調べる。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>板で確認した後、細い棒・低い段差相当の物・暗色や透明の物を1つずつ同じ場所に置きます。下のラベルを材質と方向が分かる名前に変えて繰り返し、検出できなかった位置を記録します。脚や搭載物が遮る領域も確認します。 <a href="https://oss-global-cdn.unitree.com/static/Unitree%204D%20LiDAR%20L2%20User%20Manual.pdf">Unitree LiDAR L2仕様</a></p>
+    <pre><code>go2_check 04-thin-pole-front</code></pre>
+    <p><strong>進む条件。</strong> 開けた床で対象方向が許可され、同じ方向の通過範囲に板を置くと障害物で拒否されること。板を検出できない、または未観測が続く方向は実走を保留します。配置距離は初回の目安なので、実際に測った値をログに対応づけます。</p>
+
+    <h3 id="test-06">06　6方向とキー解放を確認する</h3>
+    <p>板と人を試験区域から出し、床に機体原点の開始位置と向きをテープで示します。停止担当はリモコンを持ちます。次を端末Aに貼り付け、一覧から操作用キーボードのデバイスパスを入力します。</p>
+    <pre><code>ls -l /dev/input/by-id/*-event-kbd
+read -r -p '操作用キーボードのデバイスパス: ' GO2_TEST_KBD
+test -c "$GO2_TEST_KBD" &amp;&amp; test -r "$GO2_TEST_KBD" \
+  &amp;&amp; echo 'キーボード読取可' || echo 'デバイスパスまたは読取権限を確認'
+
+go2_drive() {
+  local label="$1" rc log
+  log=$(mktemp --suffix=.log "$GO2_TEST_LOG/$label-XXXXXX") || return
+  printf '保存先 %s\n' "$log"
+  .venv/bin/python -u go2_teleop.py --drive --net-if "$GO2_TEST_NIC" \
+    --calibration "$GO2_TEST_CAL" --keyboard "$GO2_TEST_KBD" \
+    2&gt;&amp;1 | tee "$log"
+  rc=${PIPESTATUS[0]}
+  printf '終了コード %s\n' "$rc" | tee -a "$log"
+  return "$rc"
+}</code></pre>
+    <p>端末Aで「キーボード読取可」が出たら、試験ごとに <code>go2_drive</code> を起動します。プログラムが <code>待機。Spaceと方向キーを押すと移動します。</code> と表示してから操作します。指定デバイスを直接読むため、方向操作は端末のフォーカスに依存しません。</p>
+    <pre><code>go2_drive 06-keys</code></pre>
+    <ol>
+      <li>無入力 → <kbd>W</kbd> だけ → <kbd>Space</kbd> だけ → <kbd>Space</kbd>＋<kbd>W</kbd>＋<kbd>D</kbd> の順で試します。各操作の間で全キーを離します。どれも動かなければ合格です。</li>
+      <li>静止診断で許可された方向だけ、<kbd>Space</kbd> と <kbd>W</kbd>、<kbd>S</kbd>、<kbd>A</kbd>、<kbd>D</kbd>、<kbd>Q</kbd>、<kbd>E</kbd> を1方向ずつ短く押します。表示と実際の前進・後退・左並進・右並進・左旋回・右旋回を照合します。試行のたびに両キーを離し、機体の停止を待ちます。</li>
+      <li>安全に動ける方向で、方向キーだけを離す試行とSpaceだけを離す試行を1回ずつ行います。残したキーを押し続けても停止し、両方を離してから押し直した場合にだけ再開すれば合格です。</li>
+      <li><kbd>Esc</kbd> で終了します。位置や累積指令の上限が先に出た場合は結果を記録し、機体が停止していることを確認して、残りの方向を別起動で試します。</li>
+    </ol>
+
+    <h3 id="test-07">07　解放から停止までの時間・余走・旋回角を測る</h3>
+    <p>方向ごとに次を実行します。ラベルには <code>forward</code>、<code>rear</code>、<code>left</code> などを入力します。正常に停止してから <kbd>Esc</kbd> で終了し、別の方向へ進みます。</p>
+    <pre><code>read -r -p '今回の計測方向のラベル: ' GO2_TEST_DIRECTION
+go2_drive "07-$GO2_TEST_DIRECTION"</code></pre>
+    <ol>
+      <li>床に目盛りを置き、キーを離す瞬間と機体の動きが同じ動画に入るように撮影します。方向ごとに短い動きから始め、機体が安定して停止したことを確認して3回繰り返します。</li>
+      <li>動画で「キーを離したフレーム」と「機体が静止したフレーム」を読みます。フレーム差を撮影fpsで割って停止時間を求めます。同じ2フレームの機体位置・向きの差を、余走距離と余分に回った角度として記録します。脚が胴体より外に出る最大位置も測ります。</li>
+      <li>各方向の最大値を判定に使います。<strong>進む条件</strong>は、計測誤差を含めて停止時間が0.85秒の見込みに収まり、余走距離・旋回角・脚の張り出しが設定した停止範囲と外形の余裕に収まることです。判定できない場合は障害物に向けた試験を保留します。</li>
+    </ol>
+
+    <h3 id="test-08">08　柔らかい障害物の手前で止まることを確認する</h3>
+    <p>05と07で確認できた方向に限り、05で障害物を検出した位置に柔らかい板を置きます。機体や脚との間にはすき間を取ります。旋回では機体の角が近づく側に置きます。置き直すときは運転を <kbd>Esc</kbd> で終了してから作業します。</p>
+    <pre><code>read -r -p '障害物に向けて試す方向のラベル: ' GO2_TEST_DIRECTION
+go2_check "08-$GO2_TEST_DIRECTION-detect-target"</code></pre>
+    <p>対象方向が障害物で拒否されれば、柔らかい板を検出できています。板を機体から遠ざけ、予定した開始配置で再診断します。</p>
+    <pre><code>go2_check "08-$GO2_TEST_DIRECTION-before-drive"</code></pre>
+    <p>開始配置で対象方向が許可された場合に、以下のブロックを実行します。拒否された場合は理由を記録し、板の位置と未観測域を見直します。</p>
+    <pre><code>go2_drive "08-$GO2_TEST_DIRECTION"</code></pre>
+    <ol>
+      <li>板に向かって短く操作します。停止担当は最小すき間を割りそうな場合にリモコンで止めます。既存の25 cm制限が先に効いた場合は、その結果を記録し「障害物停止」は未実施とします。</li>
+      <li><code>障害物があります</code> で止まったら、キー保持で再始動しないことを確認し、全キーを離して <kbd>Esc</kbd> で終了します。静止した機体の脚または外装と板の最も近い部分を測ります。接触なし・すき間5 cm以上が初回試験の基準案です。旋回は角や脚の最接近も動画で確認します。</li>
+    </ol>
+
+    <h3 id="test-09">09　開始位置と累積並進指令の25 cm制限を分けて確認する</h3>
+    <ol>
+      <li>障害物を撤去し、開始点をテープで示します。<code>go2_drive 09-origin-limit</code> を起動し、許可された直進方向のキーを保持します。<code>停止見込み位置が開始位置から25cmの範囲を超えます。</code> が出た時点で最後の移動方向と実際の停止位置を記録し、終了します。</li>
+      <li>静止後、別起動で <code>go2_drive 09-command-budget</code> を実行します。前進と後退が許可される場所で、短い前進・停止・短い後退・停止を繰り返します。移動のたびに両キーを離し、完全に停止してから逆方向へ入れます。</li>
+      <li>開始点の近くでも <code>この起動中の並進指令が合計25cmに達しました。</code> が出れば累積制限を確認できています。距離枠は前進・後退で相殺されません。25 cmは指令と位置判定の基準値です。実際の余走は07の値と合わせて記録します。</li>
+    </ol>
+
+    <h3 id="test-10">10　受信異常と復帰を確認する</h3>
+    <p>ソース一式の作業場所なら、先に次を実行できます。このコマンドは模擬入力だけを使います。試験ファイルがない配置先では、ソース側へ移動して実行します。</p>
+    <pre><code>.venv/bin/python -m unittest -v \
+  test_go2_teleop.InputTests.test_held_key_stops_when_released_or_lidar_drops_and_requires_rearming \
+  test_go2_teleop.PointCloudTests.test_preserves_old_obstacles_and_rejects_stale_or_replayed_cloud \
+  test_go2_teleop.PointCloudTests.test_odometry_jump_invalidates_the_local_map</code></pre>
+    <ol>
+      <li>実機は動かさず、<code>go2_check 10-connected</code> で点群更新を確認します。診断が終了し機体が停止している状態でケーブルを外し、<code>go2_check 10-disconnected</code> を実行します。ネットワーク・API・状態受信に関するエラーと非ゼロ終了を記録します。</li>
+      <li>ケーブルを戻し、<code>go2_check 10-reconnected</code> で状態コード0、点群更新と方向判定の回復を確認します。安全に動かせる状態に戻った時点で、06の手順でキーを押し直して操作します。</li>
+      <li>点群だけの途絶時にキー保持で再開しないことは先に上の模擬試験で確認します。実機での全通信断やプロセス強制終了では停止指令が届くとは限りません。機体側の停止挙動と独立した停止手段が確認できない場合は、走行中の通信断を試験しません。</li>
+    </ol>
+    <p class="note">点群0.25秒、機体状態0.15秒、キー入力・制御周期0.10秒はプログラムの鮮度判定値です。実機が停止するまでの時間には通信と機体の応答も含まれるため、07で測った値を使います。</p>
+
+    <h3 id="test-11">11　終了・キーボード切断・音声操作との競合を確認する</h3>
+    <ol>
+      <li>開けた床で <code>go2_drive 11-esc</code> を起動し、静止状態で <kbd>Esc</kbd> を押して終了します。再起動して、静止中の <kbd>Ctrl</kbd>＋<kbd>C</kbd> も確認します。07の停止確認後に、停止担当が待機した状態で短い低速操作中の <kbd>Esc</kbd> による停止も確認します。</li>
+      <li><code>go2_drive 11-keyboard-unplug</code> を起動し、機体が静止している間に操作用キーボードを抜きます。デバイスエラーで終了し、機体が静止したままなら合格です。挿し直した後は、06でデバイスパスを確認し直します。</li>
+      <li>端末Aで <code>go2_drive 11-exclusive</code> を起動し、キーを押さず待機します。端末Bを同じUbuntu PCで開き、同じ作業場所から下のコマンドを実行します。音声操作が送信担当の重複で拒否されることを確認します。音声入力待ちに入った場合は不合格として、何も入力せず <kbd>Ctrl</kbd>＋<kbd>C</kbd> で終了します。最後に端末Aで <kbd>Esc</kbd> を押します。</li>
+    </ol>
+    <pre><code>cd "$HOME/pyhai_go2_workspace"
+read -r -p '端末Aと同じGo2用の有線NIC: ' GO2_TEST_NIC
+.venv/bin/python go2_voice.py --net-if "$GO2_TEST_NIC"</code></pre>
+    <p class="notice"><strong>終了時。</strong> 全プロセスが終了し機体が静止していることを確認します。端末Aで <code>ls -lt "$GO2_TEST_LOG"</code> を実行し、各試験のログと校正ファイルがあることを確認します。動画・実測値・保留理由を試験番号に対応づけます。</p>
+  </section>
+
+  <section id="record" aria-labelledby="record-title">
+    <h2 id="record-title">試験結果の記録用紙</h2>
+    <p>日付、担当、機体とファームウェア、コードの版、PC・NIC、床材、障害物の材質と位置、使用した校正値を残します。現在のCLIは停止理由を表示します。指令の正確な時刻は別途取得したログに残し、すき間や余走を測った床の目印・動画と対応づけます。</p>
+    <p>手元で記録表を作る場合は、端末Aで次を実行します。ファイルを表計算ソフトなどで開き、試行ごとに1行ずつ記入します。</p>
+    <pre><code>if [[ ! -e "$GO2_TEST_LOG/results.tsv" ]]; then
+  printf '試験番号\t方向\t試行\t判定\t判定理由\t停止時間(s)\t余走(cm)\t余分な旋回(deg)\tすき間(cm)\tログ・動画\n' \
+    &gt; "$GO2_TEST_LOG/results.tsv"
+fi
+printf '%s\n' "$GO2_TEST_LOG/results.tsv"</code></pre>
+    <div class="table-wrap" role="region" aria-label="試験の記録欄" tabindex="0">
+      <table class="records">
+        <thead><tr><th scope="col">試験番号・方向</th><th scope="col">条件・判定理由</th><th scope="col">時間・余走・すき間</th><th scope="col">判定</th><th scope="col">ログ・動画</th></tr></thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">判定は「合格」「不合格」「未実施」で記録します。正常受信と運動許可、指令送信と実際の停止は別の結果として残してください。</p>
+  </section>
+</main>
+</body>
+</html>
