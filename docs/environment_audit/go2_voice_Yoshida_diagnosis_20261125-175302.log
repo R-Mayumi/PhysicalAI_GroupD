@@ -1,0 +1,108 @@
+go2_voice_Yoshida.py 原因調査ログ
+記録日時: 2026-11-25T17:53:02.244520+09:00
+対象: /home/scg-hp2/pyhai_go2_workspace/go2_voice_Yoshida.py
+保存時点の対象ファイルSHA256: f40c36341368d7cbaabce656ec04efdf5ab6a16a89ac91971a240c6c98dfdd87
+
+【この記録の範囲】
+直前の調査結果を保存したもの。今回の保存処理では診断を再実行していない。
+コード、VS Codeのターミナルコマンド履歴、調査側で再現した出力を照合した。
+利用者のターミナルに実際に表示された出力ログ本体は取得できていない。
+以下の再現エラーは、利用者の元の出力ログを転載したものではない。
+今回の停止原因は、利用者の実際のエラー出力との照合が必要。
+
+【確認できた事実】
+1. 実機への指令送信は未実装。
+   mainの説明: 自然言語→計画検査→模擬実行。実機送信は未実装。
+   backendはmock_only、real_robot_enabledはfalse。
+   --mode planは計画検査、--mode mockは仮想イベントの生成。
+   模擬の停止確認イベントもphysical_confirmation=falseで、実機停止の確認ではない。
+   該当箇所: go2_voice_Yoshida.py:627、644、651。
+
+2. 調査用シェルのpython3は/usr/bin/python3（Python 3.12.3）。
+   faster_whisper、sounddevice、numpy、scipyが見つからなかった。
+   このPythonで履歴の音声コマンドを再現すると、録音より前のimportで終了した。
+   利用者のターミナルで仮想環境が有効だったかは未確認。
+   コマンド表記がpython3であることだけでは、利用者が同じ実行ファイルを使ったと断定できない。
+
+3. プロジェクトの.venv/bin/pythonでは、以下のimportが成功。
+   faster_whisper / sounddevice / numpy / scipy
+   保存済みWhisper baseモデルのmodel.binも存在した。
+   .venvでのマイク録音と音声文字起こしの一連の動作は未検証。
+
+4. ローカルOllamaのGET http://127.0.0.1:11434/api/tagsに接続成功。
+   保存モデル: qwen3:4b-q4_K_M、qwen3.5:4b、qwen2.5:3b
+   推論リクエストは行っていないため、今回の指示に対する生成結果・生成時間は未確認。
+   sandbox内ではOperation not permittedとなり、ホスト環境での読み取り確認は成功。
+   sandbox側の接続制限を、利用者のアプリの障害とは判定していない。
+
+【ターミナル履歴で見つかったコマンド】
+python3 go2_voice_Yoshida.py
+python3 go2_voice_Yoshida.py --list-actions
+python3 go2_voice_Yoshida.py --text '10cmを1秒で前に進んでから右 に5度曲がって'
+python3 go2_voice_Yoshida.py --text '10cmを1秒で前に進んでから右 に5度曲がって'　--mode mock
+python3 go2_voice_Yoshida.py --engine oolama --mode plan
+python3 go2_voice_Yoshida.py --engine ollama --mode plan
+python3 go2_voice_Yoshida.py --engine ollama --text '後ろに10cm下がって'
+python3 go2_voice_Yoshida.py --voice --engine ollama --mode plan
+
+注: 上記4行目は閉じ引用符と--modeの間が全角空白U+3000。
+履歴は実行コマンドの記録であり、各実行の成功・失敗や出力を直接示すものではない。
+
+【調査側で再現した結果】
+A. /usr/bin/python3 go2_voice_Yoshida.py --voice --engine ollama --mode plan
+   終了コード: 2
+   stderr:
+   {"status": "rejected", "error": "No module named 'faster_whisper'", "real_robot_enabled": false}
+   faster_whisperのimportで終了したため、録音・Ollama問い合わせには到達していない。
+
+B. 引数なし、または --engine ollama --mode plan のみ
+   終了コード: 2
+   error: --text、--input-json、--voice、--list-actionsのいずれかを指定してください。
+   入力指定が必要。引数なしでは音声モードに自動で入らない。
+
+C. --engine oolama --mode plan
+   終了コード: 2
+   argparse error: argument --engine: invalid choice: 'oolama' (choose from 'rule', 'ollama')
+   正しい綴りはollama。
+
+D. --textの引用符直後に全角空白を置き、その後に--mode mockを指定した条件
+   終了コード: 2
+   argparse error: unrecognized arguments: mock
+   全角空白はシェルの通常の引数区切りにならないため、半角空白に置き換える必要がある。
+   調査では、そのトークン列をmainに渡して再現した。
+
+E. .venvのmainに --text '10cmを1秒で前に進んでから右 に5度曲がって' を指定
+   終了コード: 0
+   status: validated
+   backend: mock_only
+   real_robot_enabled: false
+
+F. .venvのmainに --text '10cmを1秒で前に進んで' --mode mock を指定
+   終了コード: 0
+   status: simulated
+   backend: mock_only
+   real_robot_enabled: false
+   実機は動作しない。
+
+G. 補足: --list-devices
+   終了コード: 2
+   argparse error: unrecognized arguments: --list-devices
+   microphone関数のエラー文では案内されるが、この版のCLIには同オプションが存在しない。
+
+【利用者へ案内した実行方法】
+cd /home/scg-hp2/pyhai_go2_workspace
+.venv/bin/python go2_voice_Yoshida.py --voice --engine ollama --mode plan
+
+上記は音声録音と計画作成の確認用で、実機送信機能を追加するものではない。
+この.venvでの音声録音コマンドは、本調査では実行していない。
+
+【残る確認事項】
+- 利用者が実際に実行したコマンドと、その実行に対応するエラー末尾20〜40行。
+- 利用者のターミナルで解決されるPython実行ファイルと仮想環境。
+- 必要に応じてマイク入力、Whisper文字起こし、Ollama生成を段階的に確認。
+- IDEで開かれていたphysical_ai/ros_ws/install/go2_voice_Yoshida.pyは、調査時点で実ファイルが存在しなかった。
+  今回確認したコードはプロジェクト直下のgo2_voice_Yoshida.py。
+
+【変更・実機操作】
+原因調査ではアプリコードの修正、パッケージ追加、設定変更は行っていない。
+実機への接続・動作指令・停止指令は送っていない。マイク録音も行っていない。
