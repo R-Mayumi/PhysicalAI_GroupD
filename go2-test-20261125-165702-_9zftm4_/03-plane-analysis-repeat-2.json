@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-11-25T17:23:00.605275+09:00",
+  "scope": "DDS subscriptions and offline visualization only; no commands or calibration changes",
+  "motion_authorized": false,
+  "state_code": 2010,
+  "body_height_m": 0.3268784284591675,
+  "rpy_rad": [
+    0.005104421637952328,
+    -0.024500202387571335,
+    -0.022986752912402153
+  ],
+  "configured_ground_z_m": -0.32,
+  "finite_points": 4143,
+  "raw_sensor_frame_plane": {
+    "status": "candidate",
+    "points": 900,
+    "inliers": 698,
+    "inlier_fraction": 0.7755555555555556,
+    "z_equals_a_x_plus_b_y_plus_c": [
+      0.12535390988685166,
+      -0.23194333942735817,
+      0.42270356557099964
+    ],
+    "tilt_deg": 14.769928340559472,
+    "rms_vertical_residual_m": 0.008594242467854197,
+    "note": "周囲の平面候補。床であることや正しい校正を保証しない。"
+  },
+  "configured_transform_plane": {
+    "status": "candidate",
+    "points": 2056,
+    "inliers": 1231,
+    "inlier_fraction": 0.5987354085603113,
+    "z_equals_a_x_plus_b_y_plus_c": [
+      0.45582265359580776,
+      0.16758694631500415,
+      -0.6808149221057914
+    ],
+    "tilt_deg": 25.903706873876054,
+    "rms_vertical_residual_m": 0.009948439507530698,
+    "note": "周囲の平面候補。床であることや正しい校正を保証しない。"
+  },
+  "figure": "go2-test-20261125-165702-_9zftm4_/03-plane-analysis-repeat-2.png"
+}

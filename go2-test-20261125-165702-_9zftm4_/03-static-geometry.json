@@ -1,0 +1,22 @@
+{
+  "started_at": "2026-11-25T17:17:31.143651+09:00",
+  "diagnostic_only": true,
+  "motion_authorized": false,
+  "scope": "DDS subscriptions only; no RPC, motion, stop, or calibration changes",
+  "interface": "enx9c69d351a4cf",
+  "geometry_status": "not_computed",
+  "calibration_independently_verified": false,
+  "error": "機体が動いているため静止診断を中断します。",
+  "clouds_received": 46,
+  "state_samples": {
+    "rt/sportmodestate": 890,
+    "rt/lf/sportmodestate": 60
+  },
+  "observed_state_codes": [
+    2010
+  ],
+  "processing_errors": {
+    "機体が動いているため静止診断を中断します。": 46
+  },
+  "finished_at": "2026-11-25T17:17:34.176950+09:00"
+}

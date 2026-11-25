@@ -1,0 +1,11 @@
+試験番号	方向	試行	判定	判定理由	停止時間(s)	余走(cm)	余分な旋回(deg)	すき間(cm)	ログ・動画
+02	通信	1	受信確認・走行保留	状態コード2010、LiDAR約15.4Hz					02-first.log;02-sensors.json
+03補助	胴体高さ	1	参考値取得	body_height中央値0.32688m、校正未変更・実測未確認					03-body-height.json
+03補助	6方向の静止幾何診断	1	解析実施・運動許可なし	コード2010、6方向すべて占有判定、周囲配置と校正の照合待ち					03-static-geometry-planar.json
+03補助	座標・平面候補	3	校正照合待ち	周囲約1mは空きとの申告、平面候補の傾き約23〜31度、取付変換・座標解釈の疑い					03-plane-analysis.json;03-plane-analysis-repeat-2.json;03-plane-analysis-repeat-3.json
+03	前方の椅子板・頭先端から約50cm	1	対象照合待ち	垂直・床上約30cm、20フレーム記録、板なし差分取得待ち					03-chair-present-20frames.json;03-chair-front-head-50cm-geometry.json
+03	椅子板の撤去前後比較	1	変換不整合の疑い	板下端30cm確認、撤去対応面候補のセンサー距離約0.614m、現行変換で右側床近く、校正未変更					03-chair-removed-20frames.json;03-chair-difference-candidate.json;03-chair-calibration-comparison.png
+03仮校正比較	original	1	解析実施・運動許可なし	床面格子43、占有格子2823、6方向すべて占有判定					03-static-comparison-original-1.json
+03仮校正比較	proposal	1	解析実施・運動許可なし	床面格子1168、占有格子1595、6方向すべて占有判定					03-static-comparison-proposal-1.json
+03仮校正比較	original	2	解析実施・運動許可なし	床面格子46、占有格子2871、6方向すべて占有判定					03-static-comparison-original-2.json
+03仮校正比較	proposal	2	解析実施・運動許可なし	床面格子1392、占有格子1408、6方向すべて占有判定					03-static-comparison-proposal-2.json

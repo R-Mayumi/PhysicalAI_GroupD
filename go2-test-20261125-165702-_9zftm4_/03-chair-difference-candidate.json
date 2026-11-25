@@ -1,0 +1,38 @@
+{
+  "diagnostic_only": true,
+  "motion_authorized": false,
+  "status": "candidate_not_confirmed",
+  "matching_distance_threshold_m": 0.04,
+  "changed_points_within_1_4m": 3706,
+  "candidate_points": 1091,
+  "sensor_frame_centroid_m": [
+    0.38492946837210085,
+    -0.4417855551382689,
+    0.18476066223450696
+  ],
+  "sensor_frame_plane_normal": [
+    0.6099133891440498,
+    -0.7238771775559557,
+    0.3225019217872075
+  ],
+  "plane_distance_from_sensor_m": 0.6141577860160321,
+  "sensor_frame_bounds_5_95_percentile_m": [
+    [
+      0.12984087318181992,
+      -0.6007131040096283,
+      0.06579235196113586
+    ],
+    [
+      0.531992107629776,
+      -0.3410681188106537,
+      0.5459766387939453
+    ]
+  ],
+  "sensor_frame_centroid_bearing_deg": -48.93423646240343,
+  "scatter_scales_m": [
+    0.17096463591232836,
+    0.09411202909880134,
+    0.0065648508035566384
+  ],
+  "caveat": "椅子全体・周囲の動き・走査差も差分に含み得る。板の位置確定や校正値ではない。"
+}

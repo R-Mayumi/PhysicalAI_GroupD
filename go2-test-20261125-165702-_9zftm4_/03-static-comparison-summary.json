@@ -1,0 +1,86 @@
+{
+  "diagnostic_only": true,
+  "motion_authorized": false,
+  "comparison": [
+    {
+      "calibration": "original",
+      "repeat": 1,
+      "exit_code": 0,
+      "geometry_status": "computed",
+      "state_code": 2010,
+      "floor_band_points": 184,
+      "floor_cells": 43,
+      "occupied_cells": 2823,
+      "directions": {
+        "前進": "停止までに機体が通る範囲に障害物があります。",
+        "後退": "停止までに機体が通る範囲に障害物があります。",
+        "左並進": "停止までに機体が通る範囲に障害物があります。",
+        "右並進": "停止までに機体が通る範囲に障害物があります。",
+        "左旋回": "停止までに機体が通る範囲に障害物があります。",
+        "右旋回": "停止までに機体が通る範囲に障害物があります。"
+      },
+      "error": null,
+      "report": "go2-test-20261125-165702-_9zftm4_/03-static-comparison-original-1.json"
+    },
+    {
+      "calibration": "proposal",
+      "repeat": 1,
+      "exit_code": 0,
+      "geometry_status": "computed",
+      "state_code": 2010,
+      "floor_band_points": 1157,
+      "floor_cells": 1168,
+      "occupied_cells": 1595,
+      "directions": {
+        "前進": "停止までに機体が通る範囲に障害物があります。",
+        "後退": "停止までに機体が通る範囲に障害物があります。",
+        "左並進": "停止までに機体が通る範囲に障害物があります。",
+        "右並進": "停止までに機体が通る範囲に障害物があります。",
+        "左旋回": "停止までに機体が通る範囲に障害物があります。",
+        "右旋回": "停止までに機体が通る範囲に障害物があります。"
+      },
+      "error": null,
+      "report": "go2-test-20261125-165702-_9zftm4_/03-static-comparison-proposal-1.json"
+    },
+    {
+      "calibration": "original",
+      "repeat": 2,
+      "exit_code": 0,
+      "geometry_status": "computed",
+      "state_code": 2010,
+      "floor_band_points": 228,
+      "floor_cells": 46,
+      "occupied_cells": 2871,
+      "directions": {
+        "前進": "停止までに機体が通る範囲に障害物があります。",
+        "後退": "停止までに機体が通る範囲に障害物があります。",
+        "左並進": "停止までに機体が通る範囲に障害物があります。",
+        "右並進": "停止までに機体が通る範囲に障害物があります。",
+        "左旋回": "停止までに機体が通る範囲に障害物があります。",
+        "右旋回": "停止までに機体が通る範囲に障害物があります。"
+      },
+      "error": null,
+      "report": "go2-test-20261125-165702-_9zftm4_/03-static-comparison-original-2.json"
+    },
+    {
+      "calibration": "proposal",
+      "repeat": 2,
+      "exit_code": 0,
+      "geometry_status": "computed",
+      "state_code": 2010,
+      "floor_band_points": 1417,
+      "floor_cells": 1392,
+      "occupied_cells": 1408,
+      "directions": {
+        "前進": "停止までに機体が通る範囲に障害物があります。",
+        "後退": "停止までに機体が通る範囲に障害物があります。",
+        "左並進": "停止までに機体が通る範囲に障害物があります。",
+        "右並進": "停止までに機体が通る範囲に障害物があります。",
+        "左旋回": "停止までに機体が通る範囲に障害物があります。",
+        "右旋回": "停止までに機体が通る範囲に障害物があります。"
+      },
+      "error": null,
+      "report": "go2-test-20261125-165702-_9zftm4_/03-static-comparison-proposal-2.json"
+    }
+  ]
+}

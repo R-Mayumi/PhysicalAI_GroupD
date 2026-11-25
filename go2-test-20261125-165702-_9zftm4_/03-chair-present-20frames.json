@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-11-25T17:28:27.060933+09:00",
+  "scope": "DDS subscriptions and offline visualization only; no commands or calibration changes",
+  "motion_authorized": false,
+  "state_code": 2010,
+  "body_height_m": 0.3268764913082123,
+  "rpy_rad": [
+    0.005179173778742552,
+    -0.022468391805887222,
+    -0.11323240399360657
+  ],
+  "configured_ground_z_m": -0.32,
+  "finite_points": 82546,
+  "frame_count": 20,
+  "point_snapshot": "go2-test-20261125-165702-_9zftm4_/03-chair-present-20frames.npz",
+  "raw_sensor_frame_plane": {
+    "status": "candidate",
+    "points": 20935,
+    "inliers": 14606,
+    "inlier_fraction": 0.6976833054693098,
+    "z_equals_a_x_plus_b_y_plus_c": [
+      0.12024363353822258,
+      -0.23221795600095207,
+      0.42786801239134226
+    ],
+    "tilt_deg": 14.654838257714477,
+    "rms_vertical_residual_m": 0.010290463562523547,
+    "note": "周囲の平面候補。床であることや正しい校正を保証しない。"
+  },
+  "configured_transform_plane": {
+    "status": "candidate",
+    "points": 38505,
+    "inliers": 22080,
+    "inlier_fraction": 0.5734320218153487,
+    "z_equals_a_x_plus_b_y_plus_c": [
+      0.4910998387171018,
+      0.13629524141708038,
+      -0.6932303739806713
+    ],
+    "tilt_deg": 27.00621491200863,
+    "rms_vertical_residual_m": 0.011519224008961399,
+    "note": "周囲の平面候補。床であることや正しい校正を保証しない。"
+  },
+  "figure": "go2-test-20261125-165702-_9zftm4_/03-chair-present-20frames.png"
+}

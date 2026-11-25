@@ -1,0 +1,121 @@
+[Reader] take sample error
+{
+  "started_at": "2026-11-25T17:35:15.953518+09:00",
+  "diagnostic_only": true,
+  "motion_authorized": false,
+  "scope": "DDS subscriptions only; no RPC, motion, stop, or calibration changes",
+  "interface": "enx9c69d351a4cf",
+  "geometry_status": "computed",
+  "calibration_independently_verified": false,
+  "pose_topic": "rt/sportmodestate",
+  "last_state_code": 2010,
+  "body_height_m": 0.3268784284591675,
+  "reported_velocity_m_s": [
+    -0.0023899213410913944,
+    0.0056394049897789955,
+    -0.02991289272904396
+  ],
+  "reported_yaw_speed_rad_s": -0.010652642697095871,
+  "reported_rpy_rad": [
+    0.004825661890208721,
+    -0.02280142530798912,
+    -0.254839152097702
+  ],
+  "static_check_scope": "planar velocity and yaw speed; vertical velocity recorded separately",
+  "static_planar_velocity_limit_m_s": 0.025,
+  "static_yaw_speed_limit_rad_s": 0.05,
+  "frame_id": "utlidar_lidar",
+  "points_in_last_cloud": 4180,
+  "height_profile": {
+    "configured_ground_z_m": -0.32,
+    "floor_band_half_width_m": 0.025,
+    "floor_band_points": 228,
+    "z_histogram_bin_width_m": 0.02,
+    "most_populated_z_bins": [
+      {
+        "lower_m": -0.5,
+        "upper_m": -0.48,
+        "count": 498
+      },
+      {
+        "lower_m": -0.48,
+        "upper_m": -0.46,
+        "count": 260
+      },
+      {
+        "lower_m": -0.52,
+        "upper_m": -0.5,
+        "count": 224
+      },
+      {
+        "lower_m": -0.46,
+        "upper_m": -0.44,
+        "count": 224
+      },
+      {
+        "lower_m": -0.54,
+        "upper_m": -0.52,
+        "count": 175
+      },
+      {
+        "lower_m": -0.44,
+        "upper_m": -0.42,
+        "count": 168
+      },
+      {
+        "lower_m": -0.56,
+        "upper_m": -0.54,
+        "count": 158
+      },
+      {
+        "lower_m": -0.42,
+        "upper_m": -0.4,
+        "count": 153
+      }
+    ],
+    "note": "Z分布は参考値。床や障害物の実測との照合が必要。"
+  },
+  "self_points": 0,
+  "floor_cells": 46,
+  "occupied_cells": 2871,
+  "directions": {
+    "前進": {
+      "geometry_clear": false,
+      "reason": "停止までに機体が通る範囲に障害物があります。"
+    },
+    "後退": {
+      "geometry_clear": false,
+      "reason": "停止までに機体が通る範囲に障害物があります。"
+    },
+    "左並進": {
+      "geometry_clear": false,
+      "reason": "停止までに機体が通る範囲に障害物があります。"
+    },
+    "右並進": {
+      "geometry_clear": false,
+      "reason": "停止までに機体が通る範囲に障害物があります。"
+    },
+    "左旋回": {
+      "geometry_clear": false,
+      "reason": "停止までに機体が通る範囲に障害物があります。"
+    },
+    "右旋回": {
+      "geometry_clear": false,
+      "reason": "停止までに機体が通る範囲に障害物があります。"
+    }
+  },
+  "clouds_received": 47,
+  "state_samples": {
+    "rt/sportmodestate": 867,
+    "rt/lf/sportmodestate": 60
+  },
+  "observed_state_codes": [
+    2010
+  ],
+  "processing_errors": {
+    "機体が動いているため静止診断を中断します。": 1
+  },
+  "finished_at": "2026-11-25T17:35:18.999208+09:00"
+}
+
+終了コード 0

@@ -1,0 +1,62 @@
+{
+  "started_at": "2026-11-25T17:14:38.881656+09:00",
+  "interface": "enx9c69d351a4cf",
+  "scope": "DDS subscriptions only; no RPC, setters, motion, or stop commands",
+  "calibration_changed": false,
+  "height_is_robot_reported_not_independently_measured": true,
+  "topics": {
+    "rt/sportmodestate": {
+      "count": 884,
+      "error_codes": [
+        2010
+      ],
+      "body_height_m": {
+        "min": 0.32687124609947205,
+        "median": 0.3268784284591675,
+        "max": 0.32688671350479126
+      },
+      "last": {
+        "body_height_m": 0.32687312364578247,
+        "position_m": [
+          -2.718780994415283,
+          0.6449486017227173,
+          0.31815123558044434
+        ],
+        "rpy_rad": [
+          0.004270967096090317,
+          -0.023706944659352303,
+          0.0908936858177185
+        ],
+        "mode": 0,
+        "error_code": 2010
+      }
+    },
+    "rt/lf/sportmodestate": {
+      "count": 60,
+      "error_codes": [
+        2010
+      ],
+      "body_height_m": {
+        "min": 0.3268740177154541,
+        "median": 0.3268784284591675,
+        "max": 0.32688403129577637
+      },
+      "last": {
+        "body_height_m": 0.326879620552063,
+        "position_m": [
+          -2.7187819480895996,
+          0.6449460983276367,
+          0.3181535303592682
+        ],
+        "rpy_rad": [
+          0.004285991191864014,
+          -0.023700004443526268,
+          0.0909067839384079
+        ],
+        "mode": 0,
+        "error_code": 2010
+      }
+    }
+  },
+  "finished_at": "2026-11-25T17:14:41.908754+09:00"
+}

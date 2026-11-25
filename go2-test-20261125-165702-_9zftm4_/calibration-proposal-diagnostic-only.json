@@ -1,0 +1,22 @@
+{
+  "lidar_xyz_m": [
+    0.28945,
+    0.0,
+    0.09304919711904466
+  ],
+  "lidar_rpy_rad": [
+    -2.948087187227037,
+    -0.10064844478647286,
+    -0.8912385403095885
+  ],
+  "ground_z_m": -0.32,
+  "diagnostic_only": true,
+  "independently_verified": false,
+  "note": "User approved static read-only comparison only. Not approved for driving.",
+  "assumptions": [
+    "Dominant raw near-horizontal plane is the floor; not independently verified.",
+    "Changed near-vertical plane is the front board/chair; removal correspondence supports this but not independently confirmed.",
+    "Board faces Go2 front; exact squareness unknown.",
+    "Retain nominal sensor x/y and existing provisional ground height; z translation is inferred and is not a physical mounting measurement."
+  ]
+}

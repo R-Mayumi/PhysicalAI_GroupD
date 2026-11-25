@@ -1,0 +1,110 @@
+{
+  "started_at": "2026-11-25T16:57:02.612795+09:00",
+  "guide": "/home/scg-hp2/pyhai_go2_workspace/docs/go2_lidar_実装差分と実機試験.html",
+  "workspace": "/home/scg-hp2/pyhai_go2_workspace",
+  "git_commit": "f0080a4741fd1d1706bbd410ad82c8ba47e50aea",
+  "python": "/home/scg-hp2/pyhai_go2_workspace/.venv/bin/python",
+  "nic": "enx9c69d351a4cf",
+  "host_ipv4": "192.168.123.222/24",
+  "calibration": "/home/scg-hp2/pyhai_go2_workspace/go2_lidar_calibration.json",
+  "calibration_copied_from_example": true,
+  "calibration_measured": false,
+  "unit_tests": {
+    "command": ".venv/bin/python -B -m unittest test_go2_teleop test_go2_voice -v",
+    "passed": 20,
+    "latest_command": ".venv/bin/python -B -m unittest test_go2_lidar_check test_go2_teleop test_go2_voice",
+    "latest_passed": 24
+  },
+  "motion_commands_sent": false,
+  "keyboard": {
+    "observed_path": "/dev/input/by-path/platform-i8042-serio-0-event-kbd",
+    "readable": false,
+    "selection": "built_in_user_approved",
+    "acl_change": "not_applied_sudo_password_required",
+    "helper": "/home/scg-hp2/pyhai_go2_workspace/go2-test-20261125-165702-_9zftm4_/session.bash"
+  },
+  "tests_03_to_11": "not_yet_performed",
+  "step_02": {
+    "state_code": 2010,
+    "check_exit_code": 1,
+    "lidar_hz": 15.404996817972867,
+    "communication": "PASS",
+    "motion_prerequisite": "FAIL_NONZERO_STATE"
+  },
+  "approved_procedure_changes": [
+    "06: use built-in /dev/input/by-path/platform-i8042-serio-0-event-kbd instead of dedicated /dev/input/by-id keyboard; temporarily grant current user read access on the device and restore original ACL after testing",
+    "03: supplement manual measurement with subscription-only reading of body_height; do not automatically change calibration",
+    "02-05: add standalone DDS-subscription-only LiDAR geometry diagnostic while retaining the code-0 requirement in all drive code",
+    "03: use separate provisional calibration file for static geometry comparison only; original calibration and drive requirements unchanged"
+  ],
+  "user_report": {
+    "standing": true,
+    "app_warning_or_state": "user reports no warnings; code 2010 meaning unverified",
+    "rough_height_m": 0.6,
+    "rough_height_adopted_for_calibration": false
+  },
+  "step_03_supplement": {
+    "log": "go2-test-20261125-165702-_9zftm4_/03-body-height.json",
+    "reported_body_height_m": 0.3268786072731018,
+    "state_code": 2010,
+    "calibration_ground_z_m": -0.32,
+    "calibration_independently_verified": false
+  },
+  "static_geometry": {
+    "report": "go2-test-20261125-165702-_9zftm4_/03-static-geometry-planar.json",
+    "geometry_status": "computed",
+    "state_code": 2010,
+    "motion_authorized": false,
+    "directions": "all_six_blocked_by_occupied_cells",
+    "scene": "user reports clear floor within approximately 1 m around the robot",
+    "calibration_changed": false,
+    "plane_inspections": [
+      {
+        "file": "03-plane-analysis.json",
+        "state_code": 2010,
+        "candidate_tilt_deg": 30.899538019653942
+      },
+      {
+        "file": "03-plane-analysis-repeat-2.json",
+        "state_code": 2010,
+        "candidate_tilt_deg": 25.903706873876054
+      },
+      {
+        "file": "03-plane-analysis-repeat-3.json",
+        "state_code": 2010,
+        "candidate_tilt_deg": 23.304244802864808
+      }
+    ],
+    "interpretation": "Suspected transform/frame or classification mismatch; floor candidate identity and calibration not independently verified. No calibration or drive changes."
+  },
+  "step_03_board": {
+    "object": "chair board",
+    "position": "in front of Go2",
+    "reported_distance_m": 0.5,
+    "distance_reference": "frontmost edge of head, approximate",
+    "orientation": "vertical, facing Go2",
+    "reported_height_above_floor_m": 0.3,
+    "height_reference": "lower edge of board above floor, confirmed by user",
+    "body_origin_distance_known": false,
+    "geometry_report": "go2-test-20261125-165702-_9zftm4_/03-chair-front-head-50cm-geometry.json",
+    "point_snapshot": "go2-test-20261125-165702-_9zftm4_/03-chair-present-20frames.npz",
+    "frames": 20,
+    "interpretation": "Removal-associated near-vertical plane candidate at sensor distance ~0.614m; current transform places it near right side and ground. Candidate association/physical origin not independently confirmed.",
+    "calibration_changed": false,
+    "motion_commands_sent": false,
+    "removed": true,
+    "removed_point_snapshot": "go2-test-20261125-165702-_9zftm4_/03-chair-removed-20frames.npz",
+    "difference_candidate": "go2-test-20261125-165702-_9zftm4_/03-chair-difference-candidate.json",
+    "calibration_proposal_analysis": "go2-test-20261125-165702-_9zftm4_/03-calibration-proposal-analysis.json"
+  },
+  "trial_calibration": {
+    "path": "go2-test-20261125-165702-_9zftm4_/calibration-proposal-diagnostic-only.json",
+    "approved_scope": "read-only static diagnostic comparison only",
+    "original_file_sha256": "665d79891bd530182cb415bd91fb79f54aba95599f2cd7ae55edcad1eb5380e8",
+    "independently_verified": false,
+    "comparison_report": "go2-test-20261125-165702-_9zftm4_/03-static-comparison-summary.json",
+    "height_analysis_report": "go2-test-20261125-165702-_9zftm4_/03-occupied-height-analysis.json",
+    "original_file_unchanged": true,
+    "result": "Floor classification improved; all six directions remain blocked in both repetitions; not approved for driving."
+  }
+}

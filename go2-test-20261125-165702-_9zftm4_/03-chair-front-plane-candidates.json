@@ -1,0 +1,86 @@
+{
+  "diagnostic_only": true,
+  "motion_authorized": false,
+  "planes": [
+    {
+      "count": 2075,
+      "normal": [
+        0.147,
+        -0.1547,
+        -0.977
+      ],
+      "distance_from_sensor_m": 0.45866390655416817,
+      "centroid": [
+        -0.023,
+        -0.076,
+        0.478
+      ],
+      "centroid_bearing_deg": -106.85052024508248,
+      "scatter_scales_m": [
+        0.323,
+        0.195,
+        0.007
+      ]
+    },
+    {
+      "count": 841,
+      "normal": [
+        -0.1166,
+        0.2796,
+        0.953
+      ],
+      "distance_from_sensor_m": 0.4524801618961824,
+      "centroid": [
+        0.021,
+        0.391,
+        0.363
+      ],
+      "centroid_bearing_deg": 86.86250885088447,
+      "scatter_scales_m": [
+        0.369,
+        0.301,
+        0.007
+      ]
+    },
+    {
+      "count": 496,
+      "normal": [
+        0.1324,
+        -0.2225,
+        -0.9659
+      ],
+      "distance_from_sensor_m": 0.4105039055045331,
+      "centroid": [
+        0.092,
+        -0.206,
+        0.485
+      ],
+      "centroid_bearing_deg": -65.97123032962368,
+      "scatter_scales_m": [
+        1.0,
+        0.506,
+        0.006
+      ]
+    },
+    {
+      "count": 116,
+      "normal": [
+        0.8925,
+        0.4434,
+        0.0828
+      ],
+      "distance_from_sensor_m": 0.17038151498921397,
+      "centroid": [
+        0.126,
+        0.086,
+        0.238
+      ],
+      "centroid_bearing_deg": 34.30668156377074,
+      "scatter_scales_m": [
+        0.539,
+        0.148,
+        0.006
+      ]
+    }
+  ]
+}

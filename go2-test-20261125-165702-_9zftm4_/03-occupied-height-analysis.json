@@ -1,0 +1,49 @@
+{
+  "scope": "offline diagnostic only; no commands or calibration changes",
+  "motion_authorized": false,
+  "source": "/home/scg-hp2/pyhai_go2_workspace/go2-test-20261125-165702-_9zftm4_/03-chair-removed-20frames.npz",
+  "cases": {
+    "original": {
+      "calibration": "/home/scg-hp2/pyhai_go2_workspace/go2_lidar_calibration.json",
+      "self_points_excluded": 0,
+      "near_region_abs_x_m": 0.7,
+      "near_region_abs_y_m": 0.5,
+      "near_region_points": 53404,
+      "near_floor_band_points": 2026,
+      "near_below_floor_points": 47967,
+      "near_above_floor_points": 3411,
+      "near_below_floor_z_5_50_95_percentile_m": [
+        -0.6750850533252465,
+        -0.4980442022665962,
+        -0.3836430316273796
+      ],
+      "occupied_cells_all_saved_frames": 3295,
+      "below_floor_only_occupied_cells": 2084,
+      "above_floor_only_occupied_cells": 1060,
+      "mixed_above_and_below_cells": 151,
+      "floor_cells_also_occupied": 250,
+      "note": "保存した20フレームの参考集計。本番の移動許可とは異なる。床より下の点も現行処理では占有となる。"
+    },
+    "proposal": {
+      "calibration": "/home/scg-hp2/pyhai_go2_workspace/go2-test-20261125-165702-_9zftm4_/calibration-proposal-diagnostic-only.json",
+      "self_points_excluded": 0,
+      "near_region_abs_x_m": 0.7,
+      "near_region_abs_y_m": 0.5,
+      "near_region_points": 54014,
+      "near_floor_band_points": 12667,
+      "near_below_floor_points": 36204,
+      "near_above_floor_points": 5143,
+      "near_below_floor_z_5_50_95_percentile_m": [
+        -0.378136902154833,
+        -0.3636588198351118,
+        -0.34997228485523235
+      ],
+      "occupied_cells_all_saved_frames": 1932,
+      "below_floor_only_occupied_cells": 321,
+      "above_floor_only_occupied_cells": 1488,
+      "mixed_above_and_below_cells": 123,
+      "floor_cells_also_occupied": 1097,
+      "note": "保存した20フレームの参考集計。本番の移動許可とは異なる。床より下の点も現行処理では占有となる。"
+    }
+  }
+}

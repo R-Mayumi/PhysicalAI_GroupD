@@ -1,0 +1,38 @@
+{
+  "started_at": "2026-11-25T17:18:00.965191+09:00",
+  "diagnostic_only": true,
+  "motion_authorized": false,
+  "scope": "DDS subscriptions only; no RPC, motion, stop, or calibration changes",
+  "interface": "enx9c69d351a4cf",
+  "geometry_status": "not_computed",
+  "calibration_independently_verified": false,
+  "pose_topic": "rt/sportmodestate",
+  "last_state_code": 2010,
+  "body_height_m": 0.32687562704086304,
+  "reported_velocity_m_s": [
+    0.0021346253342926502,
+    0.008512360975146294,
+    -0.030155343934893608
+  ],
+  "reported_yaw_speed_rad_s": -0.011717907153069973,
+  "reported_rpy_rad": [
+    0.0048450808972120285,
+    -0.024041658267378807,
+    0.04423653334379196
+  ],
+  "static_velocity_limit_m_s": 0.025,
+  "static_yaw_speed_limit_rad_s": 0.05,
+  "error": "機体が動いているため静止診断を中断します。",
+  "clouds_received": 46,
+  "state_samples": {
+    "rt/sportmodestate": 891,
+    "rt/lf/sportmodestate": 60
+  },
+  "observed_state_codes": [
+    2010
+  ],
+  "processing_errors": {
+    "機体が動いているため静止診断を中断します。": 46
+  },
+  "finished_at": "2026-11-25T17:18:04.002446+09:00"
+}
